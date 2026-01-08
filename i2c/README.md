@@ -1,4 +1,4 @@
-# I2C Protocol - 50 Essential Topics for Senior Engineers
+# Essential I2C Protocol Topics
 
 ## Fundamentals
 
