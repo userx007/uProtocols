@@ -1,5 +1,6 @@
 // Embedded Rust I2C Pull-up Configuration Validator
 // For use in no_std embedded environments
+
 #![no_std]
 
 /// I2C speed configuration
