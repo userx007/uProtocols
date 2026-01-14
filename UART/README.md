@@ -1,4 +1,5 @@
-# UART Protocol - 50 Essential Topics for Senior Engineers
+# UART Protocol Essential Topics
+
 
 ## Fundamentals
 
@@ -17,6 +18,7 @@ Implementing even, odd, mark, space, and no parity error detection mechanisms
 [05. **Flow Control Mechanisms**](docs/05_Flow_Control_Mechanisms.md)<br>
 Hardware (RTS/CTS) and software (XON/XOFF) flow control implementations
 
+
 ## Hardware Interface
 
 [06. **Voltage Levels and Logic**](docs/06_Voltage_Levels_And_Logic.md)<br>
@@ -33,6 +35,7 @@ Handling asynchronous signals and metastability in UART receivers
 
 [10. **Signal Integrity**](docs/10_Signal_Integrity.md)<br>
 Managing cable length, termination, and noise immunity in UART communications
+
 
 ## Software Implementation
 
@@ -51,6 +54,7 @@ Using Direct Memory Access for high-throughput UART transfers
 [15. **Circular Buffers**](docs/15_Circular_Buffers.md)<br>
 Implementing lock-free ring buffers for UART data queuing
 
+
 ## Error Handling
 
 [16. **Framing Errors**](docs/16_Framing_Errors.md)<br>
@@ -67,6 +71,7 @@ Identifying and handling extended low-level break conditions
 
 [20. **Error Recovery Strategies**](docs/20_Error_Recovery_Strategies.md)<br>
 Implementing robust error recovery and retransmission protocols
+
 
 ## Advanced Features
 
@@ -85,6 +90,7 @@ Infrared Data Association protocol using UART physical layer
 [25. **Auto-Baud Detection**](docs/25_Auto_Baud_Detection.md)<br>
 Automatically detecting communication speed from incoming data
 
+
 ## Performance Optimization
 
 [26. **Zero-Copy Techniques**](docs/26_Zero_Copy_Techniques.md)<br>
@@ -101,6 +107,7 @@ Low-power UART modes and wake-on-receive functionality
 
 [30. **Throughput Maximization**](docs/30_Throughput_Maximization.md)<br>
 Achieving maximum effective data rates with minimal overhead
+
 
 ## Testing and Debugging
 
@@ -119,6 +126,7 @@ High-load scenarios and edge case validation
 [35. **Mock Hardware Testing**](docs/35_Mock_Hardware_Testing.md)<br>
 Unit testing UART drivers without physical hardware
 
+
 ## Protocol Design
 
 [36. **Framing Protocols**](docs/36_Framing_Protocols.md)<br>
@@ -136,6 +144,7 @@ Trade-offs between human-readable and binary message formats
 [40. **State Machines**](docs/40_State_Machines.md)<br>
 Implementing robust protocol parsers with FSMs
 
+
 ## Real-World Applications
 
 [41. **GPS Module Integration**](docs/41_GPS_Module_Integration.md)<br>
@@ -152,6 +161,7 @@ Firmware update mechanisms over UART
 
 [45. **Console Interfaces**](docs/45_Console_Interfaces.md)<br>
 Implementing debug consoles and CLI over UART
+
 
 ## Safety and Reliability
 
