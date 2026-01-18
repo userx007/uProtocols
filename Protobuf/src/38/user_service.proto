@@ -1,0 +1,102 @@
+syntax = "proto3";
+
+package example;
+
+// UserService provides operations for managing user accounts.
+// This service handles user creation, retrieval, and updates.
+service UserService {
+  // Creates a new user account.
+  // 
+  // Returns the created user with a generated ID, or an error if:
+  // - The email is already registered
+  // - Required fields are missing
+  // - Email format is invalid
+  rpc CreateUser(CreateUserRequest) returns (User);
+  
+  // Retrieves a user by their unique ID.
+  // Returns NOT_FOUND error if the user doesn't exist.
+  rpc GetUser(GetUserRequest) returns (User);
+  
+  // Updates user profile information.
+  // Only provided fields are updated; others remain unchanged.
+  rpc UpdateUser(UpdateUserRequest) returns (User);
+}
+
+// Represents a user account in the system.
+// Users are uniquely identified by their ID after creation.
+message User {
+  // Unique identifier assigned by the system.
+  // This field is read-only and set during user creation.
+  int64 id = 1;
+  
+  // User's email address. Must be unique across all users.
+  // Format: Standard RFC 5322 email format.
+  string email = 2;
+  
+  // User's display name (1-50 characters).
+  string name = 3;
+  
+  // Account status indicating if the user can access the system.
+  AccountStatus status = 4;
+  
+  // Timestamp when the account was created (Unix epoch seconds).
+  int64 created_at = 5;
+  
+  // Optional phone number in E.164 format (e.g., +14155552671).
+  string phone = 6;
+  
+  // User's role determining their access permissions.
+  Role role = 7;  // defaults to ROLE_USER
+}
+
+// Defines the possible states of a user account.
+enum AccountStatus {
+  ACCOUNT_STATUS_UNSPECIFIED = 0;  // Should not be used
+  ACCOUNT_STATUS_ACTIVE = 1;       // Account is active and accessible
+  ACCOUNT_STATUS_SUSPENDED = 2;    // Temporarily disabled by admin
+  ACCOUNT_STATUS_DELETED = 3;      // Soft-deleted, can be recovered
+}
+
+// User roles determining access levels and permissions.
+enum Role {
+  ROLE_UNSPECIFIED = 0;  // Should not be used
+  ROLE_USER = 1;         // Standard user with basic permissions
+  ROLE_MODERATOR = 2;    // Can moderate content and users
+  ROLE_ADMIN = 3;        // Full system access
+}
+
+// Request message for creating a new user.
+message CreateUserRequest {
+  // Required. Email address for the new account.
+  string email = 1;
+  
+  // Required. Display name (1-50 characters).
+  string name = 2;
+  
+  // Optional. Phone number in E.164 format.
+  string phone = 3;
+  
+  // Optional. Role to assign. Defaults to ROLE_USER if not specified.
+  Role role = 4;
+}
+
+// Request message for retrieving a user by ID.
+message GetUserRequest {
+  // Required. The unique ID of the user to retrieve.
+  int64 id = 1;
+}
+
+// Request message for updating user information.
+message UpdateUserRequest {
+  // Required. The ID of the user to update.
+  int64 id = 1;
+  
+  // Optional. New display name. If empty, name is not updated.
+  string name = 2;
+  
+  // Optional. New phone number. If empty, phone is not updated.
+  string phone = 3;
+  
+  // Optional. New status. Use ACCOUNT_STATUS_UNSPECIFIED to leave unchanged.
+  AccountStatus status = 4;
+}
