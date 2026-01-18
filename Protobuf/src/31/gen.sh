@@ -1,4 +1,0 @@
-#!/bin/bash
-touch optimized_protobuf_schema.c
-touch message_size_optimization_example.cpp
-touch message_size_optimization_example.rs
