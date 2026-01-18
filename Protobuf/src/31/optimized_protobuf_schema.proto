@@ -1,0 +1,64 @@
+syntax = "proto3";
+
+package optimization;
+
+// BEFORE: Unoptimized message
+message UnoptimizedUser {
+  string biography = 16;        // 2-byte tag for frequently used field
+  int64 small_counter = 17;     // int64 for values < 100
+  fixed32 user_id = 18;         // fixed32 for small user IDs
+  repeated int32 scores = 19;   // Unpacked in proto2
+  string nickname = 1;          // Less frequently used
+}
+
+// AFTER: Optimized message
+message OptimizedUser {
+  // Frequently used fields get low numbers (1-15) = 1-byte tags
+  string biography = 1;         // Most accessed field
+  int32 small_counter = 2;      // int32 sufficient for small values
+  uint32 user_id = 3;           // uint32 uses varint encoding
+  
+  // Packed repeated fields (default in proto3)
+  repeated int32 scores = 4;    // Packed encoding saves space
+  
+  // Less frequent fields can use higher numbers
+  string nickname = 16;         // 2-byte tag acceptable here
+}
+
+// Using oneof for mutually exclusive fields
+message Notification {
+  oneof payload {
+    string text_message = 1;
+    bytes image_data = 2;
+    string video_url = 3;
+  }
+  uint32 timestamp = 4;
+}
+
+// Efficient type selection examples
+message MetricsData {
+  // Small positive integers (0-127): 1 byte with varint
+  uint32 count = 1;
+  
+  // Negative numbers: use sint32 with zigzag encoding
+  sint32 temperature = 2;       // -50 to +50 celsius
+  
+  // Large numbers that don't benefit from varint
+  fixed64 timestamp_nanos = 3;  // Always 8 bytes
+  
+  // Boolean: 1 byte tag + 1 byte value = 2 bytes
+  bool is_active = 4;
+  
+  // Floating point: fixed size
+  float precision_value = 5;    // Always 4 bytes
+}
+
+// Packed repeated fields comparison
+message DataPoints {
+  // Packed: tag + length + continuous values
+  repeated int32 measurements = 1;  // Much smaller than unpacked
+  
+  // For 100 values of 1-byte integers:
+  // Packed: ~102 bytes (1 tag + 1 length + 100 values)
+  // Unpacked: ~200 bytes (2 bytes × 100 elements)
+}
