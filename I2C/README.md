@@ -1,5 +1,6 @@
 # Essential I2C Protocol Topics
 
+
 ## Fundamentals
 
 [01. **I2C Protocol Overview**](docs/01_I2C_Protocol_Overview.md)<br>
@@ -16,6 +17,7 @@ Master control of bus initiation and termination sequences
 
 [05. **Acknowledge and NACK**](docs/05_Acknowledge_And_NACK.md)<br>
 ACK/NACK bit mechanics, error detection, and proper response handling
+
 
 ## Timing and Speed
 
@@ -34,6 +36,7 @@ Multi-master arbitration, collision detection, and resolution mechanisms
 [10. **Clock Synchronization**](docs/10_Clock_Synchronization.md)<br>
 Multi-master clock coordination and synchronization algorithms
 
+
 ## Data Transfer
 
 [11. **Write Operations**](docs/11_Write_Operations.md)<br>
@@ -50,6 +53,7 @@ Sequential multi-byte read/write operations for efficiency
 
 [15. **DMA Integration**](docs/15_DMA_Integration.md)<br>
 Direct Memory Access for I2C data transfers to reduce CPU overhead
+
 
 ## Hardware Considerations
 
@@ -68,6 +72,7 @@ Interfacing devices with different voltage levels using level shifters
 [20. **Bus Buffering**](docs/20_Bus_Buffering.md)<br>
 I2C bus buffers and repeaters for extending bus length and device count
 
+
 ## Advanced Features
 
 [21. **SMBus Compatibility**](docs/21_SMBus_Compatibility.md)<br>
@@ -84,6 +89,7 @@ Resetting I2C slaves through protocol commands without hardware reset
 
 [25. **Device ID Reading**](docs/25_Device_ID_Reading.md)<br>
 Manufacturer and device identification through standardized registers
+
 
 ## Error Handling
 
@@ -102,6 +108,7 @@ Implementing intelligent retry logic for failed transactions
 [30. **Bus Reset Strategies**](docs/30_Bus_Reset_Strategies.md)<br>
 Software and hardware methods to reset the I2C bus state
 
+
 ## Implementation Patterns
 
 [31. **Bit-banging I2C**](docs/31_Bit_Banging_I2C.md)<br>
@@ -118,6 +125,7 @@ Robust state machine architectures for I2C transaction management
 
 [35. **Driver Abstraction Layers**](docs/35_Driver_Abstraction_Layers.md)<br>
 Creating portable I2C driver interfaces across different platforms
+
 
 ## Multi-Master Scenarios
 
@@ -136,6 +144,7 @@ Implementing priority schemes for critical I2C transactions
 [40. **Deadlock Prevention**](docs/40_Deadlock_Prevention.md)<br>
 Avoiding deadlock situations in multi-master configurations
 
+
 ## Testing and Debugging
 
 [41. **Logic Analyzer Usage**](docs/41_Logic_Analyzer_Usage.md)<br>
@@ -152,6 +161,7 @@ Self-test mechanisms for validating I2C controller functionality
 
 [45. **Protocol Verification**](docs/45_Protocol_Verification.md)<br>
 Ensuring compliance with I2C specification through systematic testing
+
 
 ## Performance and Optimization
 

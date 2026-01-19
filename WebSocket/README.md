@@ -1,8 +1,5 @@
 # WebSocket Programming Guide 
 
-A comprehensive guide covering essential WebSocket concepts with C/C++ and Rust implementations.
-
-
 ## Foundation Concepts
 
 [01. **WebSocket Protocol Basics**](docs/01_WebSocket_Protocol_Basics.md)<br>
