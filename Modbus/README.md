@@ -1,4 +1,4 @@
-# Modbus Protocol: 50 Essential Topics for Senior Engineers
+# Modbus Protocol Essential Topics 
 
 ## Protocol Fundamentals
 
