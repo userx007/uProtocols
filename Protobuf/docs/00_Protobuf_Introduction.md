@@ -728,3 +728,113 @@ Rust uses `tonic-build` in `build.rs`, which automatically compiles proto files 
 ## Conclusion
 
 Protocol Buffers and gRPC provide a powerful combination for building efficient, type-safe, cross-language services. The binary format, schema validation, and HTTP/2 features make them ideal for microservices architectures, mobile applications, and any scenario where performance and reliability are critical.
+
+---
+
+# Protocol Buffers Architecture
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                    PROTOCOL BUFFERS SYSTEM                      │
+└─────────────────────────────────────────────────────────────────┘
+
+DEVELOPMENT PHASE:
+┌──────────────────┐
+│  .proto File     │  (Schema Definition)
+│                  │  
+│ message Person { │
+│   string name=1; │
+│   int32 id=2;    │
+│ }                │
+└────────┬─────────┘
+         │
+         ▼
+┌─────────────────────────────────────────────────────────────────┐
+│              protoc (Protocol Buffer Compiler)                  │
+└───┬─────────────┬─────────────┬─────────────┬──────────────────┘
+    │             │             │             │
+    ▼             ▼             ▼             ▼
+┌────────┐   ┌────────┐   ┌────────┐   ┌──────────┐
+│ .java  │   │  .py   │   │  .cpp  │   │  .go     │  (Generated Code)
+│ classes│   │ classes│   │ classes│   │  structs │
+└────────┘   └────────┘   └────────┘   └──────────┘
+
+
+RUNTIME PHASE:
+
+SERIALIZATION (Writing):
+┌─────────────────┐
+│ Application     │
+│ (Language-      │
+│  specific       │
+│  objects)       │
+└────────┬────────┘
+         │
+         ▼
+┌─────────────────────────┐
+│  Generated Classes      │  (Person object)
+│  + Serialization Logic  │
+└────────┬────────────────┘
+         │ .SerializeToString()
+         │ .toByteArray()
+         ▼
+┌─────────────────────────┐
+│   Binary Wire Format    │  (Compact binary data)
+│   [field_tag][value]... │
+└────────┬────────────────┘
+         │
+         ▼
+┌─────────────────────────┐
+│  Storage/Network        │  (File, database, RPC)
+└─────────────────────────┘
+
+
+DESERIALIZATION (Reading):
+┌─────────────────────────┐
+│  Storage/Network        │
+└────────┬────────────────┘
+         │
+         ▼
+┌─────────────────────────┐
+│   Binary Wire Format    │
+└────────┬────────────────┘
+         │ .ParseFromString()
+         │ .parseFrom()
+         ▼
+┌─────────────────────────┐
+│  Generated Classes      │
+│  + Deserialization      │
+│  Logic                  │
+└────────┬────────────────┘
+         │
+         ▼
+┌─────────────────┐
+│ Application     │
+│ (Reconstructed  │
+│  objects)       │
+└─────────────────┘
+
+
+WIRE FORMAT STRUCTURE:
+┌──────────────────────────────────────────────────┐
+│ Tag (field number + wire type) │ Value           │
+├──────────────────────────────────────────────────┤
+│ Tag: 0x0A (field 1, length)    │ "John" (5 bytes)│
+│ Tag: 0x10 (field 2, varint)    │ 123             │
+└──────────────────────────────────────────────────┘
+         (Efficient binary encoding)
+```
+
+## Key Interactions:
+
+1. **Design Time**: Developer writes `.proto` schema → `protoc` compiler generates language-specific code
+
+2. **Serialization**: Application objects → Generated code converts to binary → Compact wire format
+
+3. **Transmission/Storage**: Binary data sent over network or saved to disk
+
+4. **Deserialization**: Binary format → Generated code parses → Application objects
+
+5. **Cross-Language**: Same `.proto` file generates code for multiple languages, ensuring compatibility
+
+The beauty of Protocol Buffers is that the wire format is language-agnostic, so a Python service can serialize data that a Java service deserializes seamlessly.

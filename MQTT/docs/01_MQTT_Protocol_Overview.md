@@ -472,3 +472,81 @@ MQTT is a lightweight, efficient publish-subscribe messaging protocol ideally su
 Key features include hierarchical topics with wildcard subscriptions, retained messages for state synchronization, Last Will and Testament for disconnect notifications, and persistent sessions for offline message queuing. MQTT's minimal protocol overhead, bidirectional communication support, and robust connection management make it the standard choice for IoT deployments.
 
 The protocol operates efficiently over TCP/IP with optional TLS/SSL encryption, and can be implemented across various programming languages including C/C++ using Eclipse Paho and Rust using rumqttc. With proper security measures including authentication, authorization, and encryption, MQTT provides a solid foundation for building reliable, scalable distributed systems in domains ranging from smart homes and industrial automation to mobile applications and smart cities.
+
+---
+
+# MQTT Architecture Diagram
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                         MQTT BROKER                             │
+│  ┌───────────────────────────────────────────────────────────┐  │
+│  │                    Topic Tree                             │  │
+│  │                                                           │  │
+│  │    home/                                                  │  │
+│  │    ├── living_room/                                       │  │
+│  │    │   ├── temperature                                    │  │
+│  │    │   └── light                                          │  │
+│  │    └── bedroom/                                           │  │
+│  │        └── temperature                                    │  │
+│  │                                                           │  │
+│  └───────────────────────────────────────────────────────────┘  │
+│                                                                 │
+│  ┌──────────────────┐  ┌──────────────────┐                     │
+│  │  Subscription    │  │  Message Queue   │                     │
+│  │  Manager         │  │  & Routing       │                     │
+│  └──────────────────┘  └──────────────────┘                     │
+└─────────────────────────────────────────────────────────────────┘
+           ▲                    │                    ▲
+           │                    │                    │
+    SUBSCRIBE            PUBLISH messages      SUBSCRIBE
+           │                    │                    │
+           │                    ▼                    │
+┌──────────┴────────┐  ┌────────────────┐  ┌─────────┴─────────┐
+│                   │  │                │  │                   │
+│   SUBSCRIBER 1    │  │   PUBLISHER    │  │   SUBSCRIBER 2    │
+│   (Client A)      │  │   (Client B)   │  │   (Client C)      │
+│                   │  │                │  │                   │
+│  Subscribed to:   │  │  Publishes to: │  │  Subscribed to:   │
+│  • home/+/temp    │  │  • home/       │  │  • home/#         │
+│                   │  │    living_room/│  │  (all topics)     │
+│                   │  │    temperature │  │                   │
+└───────────────────┘  └────────────────┘  └───────────────────┘
+         │                                           │
+         │                                           │
+         └───────────────────┬───────────────────────┘
+                             │
+                        Receives:
+                   "home/living_room/temp"
+                        msg: "22.5°C"
+```
+
+## Key Components:
+
+**MQTT Broker** (Server)
+- Central hub managing all communications
+- Maintains topic hierarchy tree
+- Routes messages between publishers and subscribers
+- Manages client connections and subscriptions
+
+**Publishers** (Clients)
+- Send messages to specific topics
+- Don't need to know who receives the messages
+- Example: IoT sensor publishing temperature data
+
+**Subscribers** (Clients)
+- Subscribe to topics of interest using:
+  - Exact topic: `home/living_room/temperature`
+  - Single-level wildcard (+): `home/+/temperature`
+  - Multi-level wildcard (#): `home/#`
+- Receive messages matching their subscriptions
+
+## Message Flow:
+
+1. Clients **CONNECT** to broker
+2. Subscribers send **SUBSCRIBE** requests for topics
+3. Publishers send **PUBLISH** messages to topics
+4. Broker routes messages to matching subscribers
+5. Subscribers receive **PUBLISH** messages
+
+This publish-subscribe pattern decouples senders from receivers, making MQTT ideal for IoT and distributed systems!

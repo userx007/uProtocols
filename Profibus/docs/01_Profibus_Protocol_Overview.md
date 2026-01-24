@@ -469,3 +469,123 @@ fn main() {
 Key characteristics include master-slave architecture with token passing, support for up to 126 devices per segment, speeds from 9.6 kbps to 12 Mbps, and standardized device profiles (GSD files) for interoperability. While newer protocols like Profinet and EtherCAT are gaining ground, Profibus remains prevalent in legacy installations and industries requiring proven, reliable communication.
 
 The code examples demonstrate fundamental operations: frame construction and FCS calculation in C, object-oriented slave device simulation in C++, and safe frame parsing with Rust's type system. Production implementations would require hardware interfaces (RS-485 transceivers), real-time operating systems, and comprehensive error handling for industrial reliability.
+
+---
+
+# Profibus System ASCII Diagram
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                         PROFIBUS NETWORK                                │
+└─────────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────┐
+│   PROFIBUS MASTER    │
+│  (PLC/DCS/SCADA)     │
+│  ┌────────────────┐  │
+│  │ Application    │  │
+│  │ Layer (AL)     │  │
+│  ├────────────────┤  │
+│  │ Data Link      │  │
+│  │ Layer (DLL)    │  │
+│  ├────────────────┤  │
+│  │ Physical Layer │  │
+│  └────────┬───────┘  │
+└───────────┼──────────┘
+            │
+            │ RS-485 / Fiber Optic
+            │ (Shielded Twisted Pair)
+            │
+     ┌──────┴──────┬───────────┬───────────┬──────────┐
+     │             │           │           │          │
+     ▼             ▼           ▼           ▼          ▼
+┌─────────┐  ┌─────────┐  ┌─────────┐  ┌─────────┐  ┌─────────┐
+│ SLAVE 1 │  │ SLAVE 2 │  │ SLAVE 3 │  │ SLAVE 4 │  │ SLAVE N │
+│ I/O     │  │ Drive   │  │ Valve   │  │ Sensor  │  │ ...     │
+│ Module  │  │ VFD     │  │ Actuator│  │ Module  │  │         │
+└─────────┘  └─────────┘  └─────────┘  └─────────┘  └─────────┘
+ Addr: 1      Addr: 2      Addr: 3      Addr: 4      Addr: N
+
+
+═══════════════════════════════════════════════════════════════════════════
+                        COMMUNICATION CYCLE
+═══════════════════════════════════════════════════════════════════════════
+
+MASTER ──────────────────────────────────────────────────────────────────>
+        [Token Passing (for multi-master systems)]
+        
+MASTER ───[Request]──> SLAVE 1
+       <──[Response]─── 
+       
+MASTER ───[Request]──> SLAVE 2
+       <──[Response]─── 
+       
+MASTER ───[Request]──> SLAVE 3
+       <──[Response]─── 
+       
+        (Cyclic polling continues...)
+
+
+═══════════════════════════════════════════════════════════════════════════
+                    PROFIBUS PROTOCOL STACK
+═══════════════════════════════════════════════════════════════════════════
+
+┌────────────────────────────────────────────────────────┐
+│              Layer 7: Application Layer                │
+│  ┌──────────────────────────────────────────────────┐  │
+│  │  DP: Decentralized Periphery (Fast I/O)          │  │
+│  │  PA: Process Automation (Intrinsically Safe)     │  │
+│  │  FMS: Fieldbus Message Specification (Complex)   │  │
+│  └──────────────────────────────────────────────────┘  │
+├────────────────────────────────────────────────────────┤
+│              Layer 2: Data Link Layer (FDL)            │
+│  • Token passing (multi-master)                        │
+│  • Master-slave polling                                │
+│  • Error detection (Hamming distance HD=4)             │
+│  • Telegram structure: SD|DA|SA|FC|DATA|FCS|ED         │
+├────────────────────────────────────────────────────────┤
+│              Layer 1: Physical Layer                   │
+│  • RS-485 (9.6 kbps - 12 Mbps)                         │
+│  • MBP (Manchester Bus Powered) for PA                 │
+│  • Fiber optic option                                  │
+└────────────────────────────────────────────────────────┘
+
+
+═══════════════════════════════════════════════════════════════════════════
+                    TELEGRAM STRUCTURE
+═══════════════════════════════════════════════════════════════════════════
+
+┌────┬────┬────┬────┬──────────┬─────┬────┐
+│ SD │ DA │ SA │ FC │   DATA   │ FCS │ ED │
+└────┴────┴────┴────┴──────────┴─────┴────┘
+  │    │    │    │       │        │     │
+  │    │    │    │       │        │     └─ End Delimiter
+  │    │    │    │       │        └─────── Frame Check Sequence
+  │    │    │    │       └──────────────── User Data
+  │    │    │    └──────────────────────── Function Code
+  │    │    └───────────────────────────── Source Address
+  │    └────────────────────────────────── Destination Address
+  └─────────────────────────────────────── Start Delimiter
+
+
+═══════════════════════════════════════════════════════════════════════════
+                    KEY COMPONENTS
+═══════════════════════════════════════════════════════════════════════════
+
+• MASTER: Initiates communication, controls bus access
+• SLAVE: Responds only when addressed by master
+• BUS TERMINATOR: 220Ω resistor at each end of bus segment
+• REPEATER: Extends network distance (max 9 repeaters)
+• SEGMENT COUPLER: Connects DP and PA segments
+• MAXIMUM DEVICES: 126 per segment (addresses 0-125)
+```
+
+**Key Interaction Points:**
+
+1. **Token Passing**: In multi-master systems, masters pass a token to share bus control
+2. **Cyclic Data Exchange**: Master polls each slave in sequence for process data
+3. **Acyclic Communication**: On-demand parameter setting and diagnostics
+4. **Bus Arbitration**: Token or master-slave determines who can transmit
+5. **Error Handling**: Automatic retries, watchdog timers, and diagnostics
+
+The master controls all communication, ensuring deterministic timing critical for industrial automation!

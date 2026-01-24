@@ -434,3 +434,122 @@ async fn main() -> io::Result<()> {
 ## Summary
 
 Modbus remains a cornerstone protocol in industrial automation due to its simplicity, openness, and versatility. The three main variants—RTU, ASCII, and TCP—serve different use cases while maintaining the same fundamental request-response communication model. RTU offers efficiency for serial communications, ASCII provides readability for debugging, and TCP enables modern networked industrial systems. Understanding the protocol's architecture, frame structures, and implementation patterns is essential for developing robust industrial communication systems. The provided code examples in C/C++ and Rust demonstrate practical implementations of CRC calculation, frame construction, and client communication across different Modbus variants, offering a foundation for building industrial automation applications.
+
+---
+
+# Diagram showing the key components of Modbus and how they interact
+
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│                        MODBUS PROTOCOL STACK                        │
+└─────────────────────────────────────────────────────────────────────┘
+
+                    CLIENT/MASTER                    SERVER/SLAVE
+                    ─────────────                    ────────────
+                         │                                │
+                         │                                │
+┌────────────────────────┴────────────────────────────────┴──────────┐
+│                     APPLICATION LAYER                              │
+│  ┌──────────────────────────────────────────────────────────────┐  │
+│  │  Function Codes: Read Coils (01), Read Holding Registers     │  │
+│  │  (03), Write Single Coil (05), Write Multiple Registers (16) │  │
+│  └──────────────────────────────────────────────────────────────┘  │
+└────────────────────────────────────────────────────────────────────┘
+                         │                                │
+                         ▼                                ▼
+┌────────────────────────────────────────────────────────────────────┐
+│                   MODBUS PDU (Protocol Data Unit)                  │
+│  ┌──────────────┬────────────────────────────────────────────┐     │
+│  │ Function Code│           Data                             │     │
+│  │   (1 byte)   │        (0-252 bytes)                       │     │
+│  └──────────────┴────────────────────────────────────────────┘     │
+└────────────────────────────────────────────────────────────────────┘
+                         │                                │
+                         ▼                                ▼
+┌────────────────────────────────────────────────────────────────────┐
+│                    TRANSMISSION MODE LAYER                         │
+│                                                                    │
+│  ┌──────────────┐      ┌──────────────┐      ┌──────────────┐      │
+│  │ MODBUS RTU   │      │ MODBUS ASCII │      │ MODBUS TCP   │      │
+│  └──────────────┘      └──────────────┘      └──────────────┘      │
+└────────────────────────────────────────────────────────────────────┘
+         │                       │                       │
+         ▼                       ▼                       ▼
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│  RTU ADU        │    │  ASCII ADU      │    │  TCP ADU        │
+│ ┌─────┬───┬───┐ │    │ ┌───┬─────┬───┐ │    │ ┌────┬────┬───┐ │
+│ │Addr │PDU│CRC│ │    │ │:  │PDU  │LRC│ │    │ │MBAP│PDU │   │ │
+│ │1byte│   │2B │ │    │ │1B │ASCII│1B │ │    │ │7B  │    │   │ │
+│ └─────┴───┴───┘ │    │ └───┴─────┴───┘ │    │ └────┴────┴───┘ │
+└─────────────────┘    └─────────────────┘    └─────────────────┘
+         │                       │                       │
+         ▼                       ▼                       ▼
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│   RS-485/232    │    │   RS-485/232    │    │   ETHERNET      │
+│   Serial Bus    │    │   Serial Bus    │    │   TCP/IP        │
+└─────────────────┘    └─────────────────┘    └─────────────────┘
+
+
+                    TYPICAL REQUEST/RESPONSE FLOW
+                    ────────────────────────────
+
+    CLIENT                                           SERVER
+      │                                                │
+      │  REQUEST: Read Holding Registers               │
+      │  ┌──────────────────────────────────┐          │
+      │  │ Addr: 01                         │          │
+      │  │ FC: 03 (Read Holding Registers)  │          │
+      │  │ Starting Address: 0x0000         │          │
+      │  │ Quantity: 0x0002                 │          │
+      │  │ CRC: xxxx                        │          │
+      │  └──────────────────────────────────┘          │
+      │───────────────────────────────────────────────>│
+      │                                                │
+      │                                                │
+      │                                RESPONSE        │
+      │          ┌──────────────────────────────────┐  │
+      │          │ Addr: 01                         │  │
+      │          │ FC: 03                           │  │
+      │          │ Byte Count: 04                   │  │
+      │          │ Register Data: 0x000A 0x000B     │  │
+      │          │ CRC: xxxx                        │  │
+      │          └──────────────────────────────────┘  │
+      │<───────────────────────────────────────────────│
+      │                                                │
+
+
+                    DATA MODEL (SERVER MEMORY MAP)
+                    ──────────────────────────────
+
+┌────────────────────────────────────────────────────────────┐
+│                    DISCRETE INPUTS                         │
+│                  (Read-Only, 1 bit each)                   │
+│  Address: 10001-19999  │  FC: 02 (Read Discrete Inputs)    │
+└────────────────────────────────────────────────────────────┘
+┌────────────────────────────────────────────────────────────┐
+│                       COILS                                │
+│                  (Read/Write, 1 bit each)                  │
+│  Address: 00001-09999  │  FC: 01, 05, 15                   │
+└────────────────────────────────────────────────────────────┘
+┌────────────────────────────────────────────────────────────┐
+│                   INPUT REGISTERS                          │
+│                 (Read-Only, 16 bit each)                   │
+│  Address: 30001-39999  │  FC: 04 (Read Input Registers)    │
+└────────────────────────────────────────────────────────────┘
+┌────────────────────────────────────────────────────────────┐
+│                  HOLDING REGISTERS                         │
+│                (Read/Write, 16 bit each)                   │
+│  Address: 40001-49999  │  FC: 03, 06, 16                   │
+└────────────────────────────────────────────────────────────┘
+```
+
+**Key Components Explained:**
+
+- **Client/Master**: Initiates requests and processes responses
+- **Server/Slave**: Responds to requests with data from its memory map
+- **PDU**: Contains function code and data (transport-independent)
+- **ADU**: Adds addressing and error checking specific to the transmission mode
+- **Function Codes**: Define the operation (read/write, coils/registers)
+- **Data Model**: Four distinct memory areas with different access permissions
+
+The protocol works by the client sending a request with a specific function code, and the server responding with the requested data or an error code.

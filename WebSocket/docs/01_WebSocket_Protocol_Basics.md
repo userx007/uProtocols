@@ -820,3 +820,99 @@ fn main() -> std::io::Result<()> {
 5. **Use Cases**: Real-time chat applications, live notifications, multiplayer games, financial trading platforms, collaborative editing tools, and IoT device communication.
 
 WebSocket has become an essential technology for modern web applications requiring real-time features, providing a standardized way to maintain persistent connections with efficient bidirectional data flow.
+
+---
+
+# WebSocket Architecture Diagram
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                         WebSocket Connection                    │
+└─────────────────────────────────────────────────────────────────┘
+
+    CLIENT SIDE                                  SERVER SIDE
+┌─────────────────┐                          ┌─────────────────┐
+│   Web Browser   │                          │   Web Server    │
+│   or Client     │                          │  (Node.js, etc) │
+└────────┬────────┘                          └────────┬────────┘
+         │                                            │
+         │  1. HTTP Handshake Request                 │
+         │    GET /chat HTTP/1.1                      │
+         │    Upgrade: websocket                      │
+         │    Connection: Upgrade                     │
+         │    Sec-WebSocket-Key: [random]             │
+         │───────────────────────────────────────────>│
+         │                                            │
+         │  2. HTTP 101 Switching Protocols           │
+         │    HTTP/1.1 101 Switching Protocols        │
+         │    Upgrade: websocket                      │
+         │    Connection: Upgrade                     │
+         │    Sec-WebSocket-Accept: [hash]            │
+         │<───────────────────────────────────────────│
+         │                                            │
+         │════════════════════════════════════════════│
+         ║     WebSocket Connection Established       ║
+         ║        (Full-Duplex Communication)         ║
+         ║════════════════════════════════════════════║
+         │                                            │
+         │  3. Data Frame (Client → Server)           │
+         │    ┌──────────────────────┐                │
+         │    │ FIN | Opcode | Mask  │                │
+         │    │ Payload Length       │                │
+         │    │ Masking Key          │                │
+         │    │ Payload Data         │                │
+         │    └──────────────────────┘                │
+         │───────────────────────────────────────────>│
+         │                                            │
+         │  4. Data Frame (Server → Client)           │
+         │    ┌──────────────────────┐                │
+         │    │ FIN | Opcode         │                │
+         │    │ Payload Length       │                │
+         │    │ Payload Data         │                │
+         │    └──────────────────────┘                │
+         │<───────────────────────────────────────────│
+         │                                            │
+         │  5. Ping (Heartbeat)                       │
+         │───────────────────────────────────────────>│
+         │                                            │
+         │  6. Pong (Response)                        │
+         │<───────────────────────────────────────────│
+         │                                            │
+         │  7. Close Frame                            │
+         │───────────────────────────────────────────>│
+         │                                            │
+         │  8. Close Frame (Acknowledgment)           │
+         │<───────────────────────────────────────────│
+         │                                            │
+         ▼                                            ▼
+    Connection Closed                         Connection Closed
+
+
+KEY COMPONENTS:
+
+┌────────────────────────────────────────────────────────────────┐
+│  Client Application (JavaScript)                               │
+├────────────────────────────────────────────────────────────────┤
+│  • WebSocket API (new WebSocket(url))                          │
+│  • Event Handlers: onopen, onmessage, onerror, onclose         │
+│  • Methods: send(), close()                                    │
+└────────────────────────────────────────────────────────────────┘
+
+┌────────────────────────────────────────────────────────────────┐
+│  Server Application (Node.js/Python/Java)                      │
+├────────────────────────────────────────────────────────────────┤
+│  • WebSocket Server Library (ws, socket.io, etc)               │
+│  • Connection Handler                                          │
+│  • Message Router                                              │
+│  • Broadcasting Logic                                          │
+└────────────────────────────────────────────────────────────────┘
+
+FRAME TYPES:
+- Text Frame (0x1)    - UTF-8 text data
+- Binary Frame (0x2)  - Binary data
+- Close Frame (0x8)   - Connection termination
+- Ping Frame (0x9)    - Keep-alive check
+- Pong Frame (0xA)    - Ping response
+```
+
+The diagram shows how WebSocket starts with an HTTP handshake that upgrades to a persistent, bidirectional connection allowing both client and server to send messages independently at any time.
