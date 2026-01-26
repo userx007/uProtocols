@@ -169,3 +169,171 @@ Leveraging compiler features and inline assembly for performance-critical CAN pa
 
 [50. **Profiling CAN Stack Performance**](docs/50_Profiling_CAN_Stack_Performance.md)<br>
 Tools and techniques to measure latency, throughput, and CPU utilization in CAN implementations.
+
+## Compliance and Standards
+
+[51. **AUTOSAR CAN Stack Architecture**](docs/51_AUTOSAR_CAN_Stack_Architecture.md)<br>
+Understanding the layered AUTOSAR communication stack: CAN driver, CAN interface, PDU router, and COM module.
+
+[52. **ISO 11898 Compliance Testing**](docs/52_ISO_11898_Compliance_Testing.md)<br>
+Validation procedures and test cases for ensuring CAN controller conformance to international standards.
+
+[53. **MISRA C Guidelines for CAN Code**](docs/53_MISRA_C_Guidelines_for_CAN_Code.md)<br>
+Applying MISRA-C coding standards to CAN driver and stack implementation for safety-critical systems.
+
+[54. **Functional Safety (ISO 26262)**](docs/54_Functional_Safety_ISO_26262.md)<br>
+Designing CAN communication systems to meet ASIL requirements including safety mechanisms and fault metrics.
+
+[55. **EMC Considerations**](docs/55_EMC_Considerations.md)<br>
+Electromagnetic compatibility design practices for CAN physical layer to meet automotive EMC standards.
+
+## Advanced Protocols
+
+[56. **CAN Kingdom Protocol**](docs/56_CAN_Kingdom_Protocol.md)<br>
+Plug-and-play CAN protocol with dynamic address allocation and capability exchange for modular systems.
+
+[57. **DeviceNet Protocol**](docs/57_DeviceNet_Protocol.md)<br>
+Industrial CAN-based protocol for factory automation with predefined connection sets and explicit messaging.
+
+[58. **CANaerospace Standard**](docs/58_CANaerospace_Standard.md)<br>
+Lightweight protocol for avionics and aerospace applications with standardized message identifiers.
+
+[59. **NMEA 2000 Marine Protocol**](docs/59_NMEA_2000_Marine_Protocol.md)<br>
+Maritime CAN network standard for vessel instrumentation and sensor integration.
+
+[60. **SAE J2284 (CAN for Diagnostics)**](docs/60_SAE_J2284_CAN_for_Diagnostics.md)<br>
+Enhanced diagnostic communication protocol building on ISO 15765 for automotive applications.
+
+## Embedded Systems Integration
+
+[61. **Power Management and Sleep Modes**](docs/61_Power_Management_and_Sleep_Modes.md)<br>
+Implementing selective wake-up, partial networking, and low-power CAN transceiver modes for energy efficiency.
+
+[62. **Watchdog Integration**](docs/62_Watchdog_Integration.md)<br>
+Coordinating hardware and software watchdogs with CAN communication health monitoring.
+
+[63. **Multi-Core CAN Processing**](docs/63_Multi_Core_CAN_Processing.md)<br>
+Distributing CAN processing across multiple CPU cores with lock-free queues and synchronization strategies.
+
+[64. **Memory-Constrained Implementations**](docs/64_Memory_Constrained_Implementations.md)<br>
+Optimizing CAN stack footprint for microcontrollers with limited RAM and flash resources.
+
+[65. **CAN over Ethernet Tunneling**](docs/65_CAN_over_Ethernet_Tunneling.md)<br>
+Encapsulating CAN frames in Ethernet packets for remote access and distributed development.
+
+## Testing and Validation
+
+[66. **HIL (Hardware-in-the-Loop) Testing**](docs/66_HIL_Hardware_in_the_Loop_Testing.md)<br>
+Setting up hardware-in-the-loop test benches for automated CAN ECU validation and regression testing.
+
+[67. **Simulation and Virtual Networks**](docs/67_Simulation_and_Virtual_Networks.md)<br>
+Using CANoe, Busmaster, and virtual CAN interfaces for protocol development without physical hardware.
+
+[68. **Fault Injection Testing**](docs/68_Fault_Injection_Testing.md)<br>
+Systematic introduction of errors (short circuits, open circuits, babbling nodes) to validate robustness.
+
+[69. **Coverage Analysis**](docs/69_Coverage_Analysis.md)<br>
+Measuring code coverage and scenario coverage for CAN driver and protocol stack validation.
+
+[70. **Automated Test Case Generation**](docs/70_Automated_Test_Case_Generation.md)<br>
+Using model-based testing and property-based testing to generate comprehensive CAN test suites.
+
+## Advanced Diagnostics
+
+[71. **XCP Protocol over CAN**](docs/71_XCP_Protocol_over_CAN.md)<br>
+Universal measurement and calibration protocol for ECU parameter tuning and data acquisition.
+
+[72. **Logging and Trace Systems**](docs/72_Logging_and_Trace_Systems.md)<br>
+Implementing efficient circular logging buffers and triggered trace capture for post-mortem analysis.
+
+[73. **Remote Diagnostics and Telematics**](docs/73_Remote_Diagnostics_and_Telematics.md)<br>
+Bridging CAN networks to cloud services for fleet monitoring and predictive maintenance.
+
+[74. **Diagnostic Data Flash**](docs/74_Diagnostic_Data_Flash.md)<br>
+Managing freeze frame data, environmental data, and extended diagnostic records in non-volatile memory.
+
+[75. **CAN Health Monitoring**](docs/75_CAN_Health_Monitoring.md)<br>
+Tracking error counters, bus-off events, and signal quality metrics to predict and prevent failures.
+
+## Industrial Applications
+
+[76. **CAN in Robotics**](docs/76_CAN_in_Robotics.md)<br>
+Using CAN for real-time motor control, sensor fusion, and coordinated multi-axis robot communication.
+
+[77. **CAN in Medical Devices**](docs/77_CAN_in_Medical_Devices.md)<br>
+Applying IEC 62304 software lifecycle and ISO 13485 quality management to medical CAN systems.
+
+[78. **CAN in Renewable Energy**](docs/78_CAN_in_Renewable_Energy.md)<br>
+Monitoring and control of solar inverters, wind turbines, and battery management systems via CAN.
+
+[79. **CAN in Building Automation**](docs/79_CAN_in_Building_Automation.md)<br>
+Integration with HVAC, lighting, and access control systems using CAN-based protocols.
+
+[80. **CAN in Railway Systems**](docs/80_CAN_in_Railway_Systems.md)<br>
+Train control networks, passenger information systems, and safety-critical rail communication.
+
+## Emerging Technologies
+
+[81. **Machine Learning on CAN Data**](docs/81_Machine_Learning_on_CAN_Data.md)<br>
+Applying anomaly detection, predictive maintenance, and pattern recognition to CAN traffic analysis.
+
+[82. **CAN for Autonomous Vehicles**](docs/82_CAN_for_Autonomous_Vehicles.md)<br>
+Integrating CAN with Ethernet and sensor fusion for ADAS and self-driving systems.
+
+[83. **Time-Sensitive Networking (TSN)**](docs/83_Time_Sensitive_Networking_TSN.md)<br>
+Bridging CAN to IEEE 802.1 TSN networks for deterministic real-time communication.
+
+[84. **CAN in Electric Vehicle Architecture**](docs/84_CAN_in_Electric_Vehicle_Architecture.md)<br>
+High-voltage battery management, motor control, and charging communication over CAN.
+
+[85. **Quantum-Safe CAN Security**](docs/85_Quantum_Safe_CAN_Security.md)<br>
+Preparing CAN security architectures for post-quantum cryptographic algorithms and key management.
+
+## Documentation and Maintenance
+
+[86. **CAN Network Documentation**](docs/86_CAN_Network_Documentation.md)<br>
+Best practices for maintaining network topology diagrams, signal lists, and configuration management.
+
+[87. **Version Control for DBC Files**](docs/87_Version_Control_for_DBC_Files.md)<br>
+Managing database file evolution, compatibility matrices, and change tracking in multi-project environments.
+
+[88. **Code Generation from CAN Databases**](docs/88_Code_Generation_from_CAN_Databases.md)<br>
+Automated generation of packing/unpacking functions, type definitions, and documentation from DBC files.
+
+[89. **Legacy System Integration**](docs/89_Legacy_System_Integration.md)<br>
+Bridging older CAN implementations with modern systems using protocol translators and adapters.
+
+[90. **Migration Strategies (CAN to CAN FD)**](docs/90_Migration_Strategies_CAN_to_CAN_FD.md)<br>
+Planning and executing network upgrades while maintaining backward compatibility and system availability.
+
+## Specialized Topics
+
+[91. **Redundant CAN Networks**](docs/91_Redundant_CAN_Networks.md)<br>
+Designing dual-CAN architectures for fault tolerance in safety-critical applications.
+
+[92. **CAN Bus Arbitration Timing Analysis**](docs/92_CAN_Bus_Arbitration_Timing_Analysis.md)<br>
+Mathematical modeling of worst-case message latency and response time analysis.
+
+[93. **Thermal Management for CAN Systems**](docs/93_Thermal_Management_for_CAN_Systems.md)<br>
+Designing for extreme temperature operation and thermal shutdown protection in transceivers.
+
+[94. **CAN Bus Length and Stub Calculations**](docs/94_CAN_Bus_Length_and_Stub_Calculations.md)<br>
+Engineering guidelines for maximum bus length, stub length, and node count based on bit rate.
+
+[95. **Common Mode Choke Selection**](docs/95_Common_Mode_Choke_Selection.md)<br>
+Choosing appropriate common mode filters to reduce EMI and improve signal integrity.
+
+[96. **Oscilloscope Analysis of CAN Signals**](docs/96_Oscilloscope_Analysis_of_CAN_Signals.md)<br>
+Interpreting eye diagrams, rise times, and voltage levels to diagnose physical layer problems.
+
+[97. **CAN Bus Repair and Maintenance**](docs/97_CAN_Bus_Repair_and_Maintenance.md)<br>
+Troubleshooting techniques for identifying broken wires, failed transceivers, and intermittent faults.
+
+[98. **Cost Optimization in CAN Design**](docs/98_Cost_Optimization_in_CAN_Design.md)<br>
+Balancing component selection, bandwidth requirements, and system partitioning for cost-effective designs.
+
+[99. **CAN Penetration Testing**](docs/99_CAN_Penetration_Testing.md)<br>
+Ethical hacking methodologies for assessing CAN network security and identifying vulnerabilities.
+
+[100. **Future of CAN Technology**](docs/100_Future_of_CAN_Technology.md)<br>
+Exploring CAN XL adoption, integration with Ethernet backbones, and evolution in next-generation vehicles.
