@@ -173,3 +173,171 @@ Implementing error counters, message statistics, and health monitoring.
 50. **[Unit Testing Strategies](docs/50_Unit_Testing_Strategies.md)**<br>
 Testing Modbus implementations with mock devices and simulators.
 
+
+## Extended Function Codes
+
+51. **[Function Code 0x07: Read Exception Status](docs/51_Function_Code_0x07_Read_Exception_Status.md)**<br>
+Reading 8-bit exception status for rapid polling of device health and alarms.
+
+52. **[Function Code 0x08: Diagnostics](docs/52_Function_Code_0x08_Diagnostics.md)**<br>
+Diagnostic sub-functions for loopback testing, counter resets, and bus diagnostics.
+
+53. **[Function Code 0x0B: Get Comm Event Counter](docs/53_Function_Code_0x0B_Get_Comm_Event_Counter.md)**<br>
+Monitoring communication event counter for network health tracking.
+
+54. **[Function Code 0x0C: Get Comm Event Log](docs/54_Function_Code_0x0C_Get_Comm_Event_Log.md)**<br>
+Retrieving detailed communication event logs from slave devices.
+
+55. **[Function Code 0x14: Read File Record](docs/55_Function_Code_0x14_Read_File_Record.md)**<br>
+Reading data from file records in structured slave memory.
+
+56. **[Function Code 0x15: Write File Record](docs/56_Function_Code_0x15_Write_File_Record.md)**<br>
+Writing data to file records for complex data structures.
+
+57. **[Function Code 0x16: Mask Write Register](docs/57_Function_Code_0x16_Mask_Write_Register.md)**<br>
+Performing AND-OR masking operations on holding registers.
+
+58. **[Function Code 0x18: Read FIFO Queue](docs/58_Function_Code_0x18_Read_FIFO_Queue.md)**<br>
+Reading from first-in-first-out queues in slave devices.
+
+59. **[Function Code 0x2B: Encapsulated Interface Transport](docs/59_Function_Code_0x2B_Encapsulated_Interface_Transport.md)**<br>
+MEI type for device identification and CANopen-style object dictionary access.
+
+60. **[Custom Function Codes (0x41-0x48, 0x64-0x6E)](docs/60_Custom_Function_Codes.md)**<br>
+Implementing vendor-specific function codes for proprietary extensions.
+
+## Gateway and Protocol Bridging
+
+61. **[Modbus Gateway Architecture](docs/61_Modbus_Gateway_Architecture.md)**<br>
+Designing gateways for bridging RTU, ASCII, and TCP networks.
+
+62. **[RTU to TCP Conversion](docs/62_RTU_to_TCP_Conversion.md)**<br>
+Protocol translation between serial Modbus RTU and Modbus TCP.
+
+63. **[Protocol Translation Patterns](docs/63_Protocol_Translation_Patterns.md)**<br>
+Mapping between different industrial protocols (Profibus, EtherNet/IP, OPC UA).
+
+64. **[Address Mapping and Translation](docs/64_Address_Mapping_and_Translation.md)**<br>
+Converting slave addresses and register addresses across protocol boundaries.
+
+65. **[Multi-Protocol Gateway Implementation](docs/65_Multi_Protocol_Gateway_Implementation.md)**<br>
+Building gateways that support multiple simultaneous protocol conversions.
+
+## Industrial Integration
+
+66. **[SCADA System Integration](docs/66_SCADA_System_Integration.md)**<br>
+Connecting Modbus devices to SCADA platforms and HMI systems.
+
+67. **[PLC Communication](docs/67_PLC_Communication.md)**<br>
+Interfacing Modbus with programmable logic controllers and ladder logic.
+
+68. **[OPC UA Integration](docs/68_OPC_UA_Integration.md)**<br>
+Bridging Modbus to OPC UA servers for Industry 4.0 applications.
+
+69. **[MQTT Bridge](docs/69_MQTT_Bridge.md)**<br>
+Publishing Modbus data to MQTT brokers for IoT cloud connectivity.
+
+70. **[Historian Database Integration](docs/70_Historian_Database_Integration.md)**<br>
+Storing time-series Modbus data in industrial historians and databases.
+
+## Advanced TCP Features
+
+71. **[Modbus TCP Security (TLS)](docs/71_Modbus_TCP_Security_TLS.md)**<br>
+Implementing Transport Layer Security for encrypted Modbus TCP communication.
+
+72. **[UDP Transport Layer](docs/72_UDP_Transport_Layer.md)**<br>
+Using UDP for Modbus communication in scenarios requiring multicast or reduced overhead.
+
+73. **[Load Balancing and Redundancy](docs/73_Load_Balancing_and_Redundancy.md)**<br>
+Implementing redundant servers and load distribution strategies.
+
+74. **[Virtual COM Port Tunneling](docs/74_Virtual_COM_Port_Tunneling.md)**<br>
+Emulating serial ports over TCP/IP for legacy application compatibility.
+
+75. **[WebSocket Transport](docs/75_WebSocket_Transport.md)**<br>
+Enabling browser-based Modbus clients using WebSocket protocol.
+
+## Real-Time and Embedded Systems
+
+76. **[RTOS Integration](docs/76_RTOS_Integration.md)**<br>
+Implementing Modbus stacks on FreeRTOS, Zephyr, and other embedded RTOS platforms.
+
+77. **[Bare-Metal Implementation](docs/77_Bare_Metal_Implementation.md)**<br>
+Building Modbus without operating system support on microcontrollers.
+
+78. **[Interrupt-Driven Serial Communication](docs/78_Interrupt_Driven_Serial_Communication.md)**<br>
+Using UART interrupts for efficient character reception and transmission.
+
+79. **[DMA for Serial Transfers](docs/79_DMA_for_Serial_Transfers.md)**<br>
+Implementing Direct Memory Access for high-speed serial Modbus communication.
+
+80. **[Hard Real-Time Constraints](docs/80_Hard_Real_Time_Constraints.md)**<br>
+Meeting deterministic timing requirements in safety-critical applications.
+
+## Energy and Power Management
+
+81. **[Modbus in Smart Meters](docs/81_Modbus_in_Smart_Meters.md)**<br>
+Using Modbus for electric, gas, and water meter reading applications.
+
+82. **[Power Quality Monitoring](docs/82_Power_Quality_Monitoring.md)**<br>
+Reading voltage, current, power factor, and harmonics via Modbus.
+
+83. **[Solar Inverter Communication](docs/83_Solar_Inverter_Communication.md)**<br>
+Monitoring and controlling photovoltaic inverters using Modbus protocols.
+
+84. **[Battery Management Systems](docs/84_Battery_Management_Systems.md)**<br>
+Accessing BMS data for state of charge, voltage, temperature, and health metrics.
+
+85. **[Building Automation (BACnet Bridge)](docs/85_Building_Automation_BACnet_Bridge.md)**<br>
+Integrating Modbus HVAC equipment with BACnet building automation systems.
+
+## Specialized Applications
+
+86. **[Motor Drive Control](docs/86_Motor_Drive_Control.md)**<br>
+Controlling VFDs (Variable Frequency Drives) using Modbus for speed and torque control.
+
+87. **[Temperature Controller Integration](docs/87_Temperature_Controller_Integration.md)**<br>
+Reading and setting temperature parameters in PID controllers.
+
+88. **[Flow Meter and Totalizer](docs/88_Flow_Meter_and_Totalizer.md)**<br>
+Accessing flow rate, totalized volume, and calibration data.
+
+89. **[Weighing and Load Cell Systems](docs/89_Weighing_and_Load_Cell_Systems.md)**<br>
+Reading weight, tare, and calibration from industrial scales via Modbus.
+
+90. **[Environmental Monitoring](docs/90_Environmental_Monitoring.md)**<br>
+Collecting temperature, humidity, pressure, and air quality sensor data.
+
+## Testing and Simulation
+
+91. **[Modbus Simulator Development](docs/91_Modbus_Simulator_Development.md)**<br>
+Creating virtual slaves for testing without physical hardware.
+
+92. **[Fuzzing and Security Testing](docs/92_Fuzzing_and_Security_Testing.md)**<br>
+Using fuzzing techniques to discover vulnerabilities in Modbus implementations.
+
+93. **[Load Testing and Stress Testing](docs/93_Load_Testing_and_Stress_Testing.md)**<br>
+Validating system performance under high transaction rates and stress conditions.
+
+94. **[Protocol Compliance Testing](docs/94_Protocol_Compliance_Testing.md)**<br>
+Verifying conformance to Modbus specification using standardized test suites.
+
+95. **[Hardware-in-the-Loop Testing](docs/95_Hardware_in_the_Loop_Testing.md)**<br>
+Integrating real devices with simulated environments for comprehensive testing.
+
+## Documentation and Standards
+
+96. **[Modbus Specification Evolution](docs/96_Modbus_Specification_Evolution.md)**<br>
+Understanding changes from original Modicon protocol through current Modbus.org standards.
+
+97. **[IEC 61158 Compliance](docs/97_IEC_61158_Compliance.md)**<br>
+Modbus as part of IEC 61158 fieldbus standard family.
+
+98. **[Device Profile Documentation](docs/98_Device_Profile_Documentation.md)**<br>
+Creating comprehensive register maps and device documentation for end users.
+
+99. **[Configuration File Formats](docs/99_Configuration_File_Formats.md)**<br>
+Using JSON, XML, and CSV for Modbus device configuration storage.
+
+100. **[Modbus Plus and Proprietary Extensions](docs/100_Modbus_Plus_and_Proprietary_Extensions.md)**<br>
+Understanding legacy Modbus Plus networks and vendor-specific protocol variants.
