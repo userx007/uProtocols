@@ -210,3 +210,173 @@ Human-readable text format for debugging, testing, and configuration files.
 
 [50. Integration_with_gRPC_Services](docs/50_Integration_with_gRPC_Services.md)<br>
 Using protobuf as the IDL for gRPC, service definitions, and streaming patterns.. 
+
+## Language-Specific Implementation (51-55)
+
+[51. CPP_Implementation_Details](docs/51_CPP_Implementation_Details.md)<br>
+Deep dive into C++ protobuf API, arena allocators, move semantics, and zero-copy patterns.
+
+[52. Java_Protobuf_Best_Practices](docs/52_Java_Protobuf_Best_Practices.md)<br>
+Builder patterns, immutability, Lite runtime vs full runtime, and Android optimizations.
+
+[53. Python_Protobuf_Usage](docs/53_Python_Protobuf_Usage.md)<br>
+Pure Python vs C++ implementation, dynamic message creation, and Python-specific patterns.
+
+[54. Go_Protobuf_Patterns](docs/54_Go_Protobuf_Patterns.md)<br>
+Working with protoc-gen-go, grpc-gateway, and idiomatic Go protobuf code.
+
+[55. Rust_Prost_and_Protobuf](docs/55_Rust_Prost_and_Protobuf.md)<br>
+Using prost for Rust protobuf generation, serde integration, and ownership patterns.
+
+## Advanced Schema Design (56-60)
+
+[56. Polymorphism_with_Oneof_and_Any](docs/56_Polymorphism_with_Oneof_and_Any.md)<br>
+Implementing polymorphic patterns using oneof discriminated unions and Any types.
+
+[57. Composition_vs_Inheritance_Patterns](docs/57_Composition_vs_Inheritance_Patterns.md)<br>
+Protobuf doesn't support inheritance; using composition and interfaces for similar patterns.
+
+[58. Domain_Driven_Design_with_Protobuf](docs/58_Domain_Driven_Design_with_Protobuf.md)<br>
+Modeling bounded contexts, aggregates, and entities using protobuf messages.
+
+[59. Event_Sourcing_Message_Design](docs/59_Event_Sourcing_Message_Design.md)<br>
+Designing immutable event messages for event sourcing architectures.
+
+[60. CQRS_Command_and_Query_Models](docs/60_CQRS_Command_and_Query_Models.md)<br>
+Separating command and query message definitions for CQRS patterns.
+
+## Validation and Constraints (61-65)
+
+[61. Protoc_gen_validate_Integration](docs/61_Protoc_gen_validate_Integration.md)<br>
+Using protoc-gen-validate for declarative validation rules in proto files.
+
+[62. Custom_Validation_Rules](docs/62_Custom_Validation_Rules.md)<br>
+Implementing application-specific validation logic on top of generated code.
+
+[63. Range_and_Pattern_Constraints](docs/63_Range_and_Pattern_Constraints.md)<br>
+Defining numeric ranges, string patterns, and collection size constraints.
+
+[64. Cross_Field_Validation](docs/64_Cross_Field_Validation.md)<br>
+Validating interdependent fields and complex business rules.
+
+[65. Validation_Error_Reporting](docs/65_Validation_Error_Reporting.md)<br>
+Structured error messages and field path reporting for validation failures.
+
+## RPC and Service Definition (66-70)
+
+[66. Service_Definition_Syntax](docs/66_Service_Definition_Syntax.md)<br>
+Defining RPC services with rpc keyword, request/response messages, and method options.
+
+[67. Unary_vs_Streaming_RPCs](docs/67_Unary_vs_Streaming_RPCs.md)<br>
+Comparing unary, server streaming, client streaming, and bidirectional streaming patterns.
+
+[68. Method_Options_and_Metadata](docs/68_Method_Options_and_Metadata.md)<br>
+Using method options for HTTP mapping, authentication requirements, and custom annotations.
+
+[69. Error_Handling_in_RPC_Services](docs/69_Error_Handling_in_RPC_Services.md)<br>
+Defining error response messages, status codes, and error details using google.rpc.Status.
+
+[70. Service_Versioning_Strategies](docs/70_Service_Versioning_Strategies.md)<br>
+Managing multiple service versions, deprecation paths, and backward compatibility.
+
+## Wire Format Advanced Topics (71-75)
+
+[71. Unknown_Field_Handling](docs/71_Unknown_Field_Handling.md)<br>
+How parsers handle unknown fields, preserving them for forward compatibility.
+
+[72. Message_Framing_for_Streaming](docs/72_Message_Framing_for_Streaming.md)<br>
+Length-prefixed framing for reading multiple messages from streams.
+
+[73. Canonical_Encoding_Rules](docs/73_Canonical_Encoding_Rules.md)<br>
+Deterministic serialization for cryptographic signatures and content-addressed storage.
+
+[74. Compression_Strategies](docs/74_Compression_Strategies.md)<br>
+When and how to apply gzip, snappy, or LZ4 compression to protobuf messages.
+
+[75. Delta_Encoding_Patterns](docs/75_Delta_Encoding_Patterns.md)<br>
+Encoding only changed fields for efficient updates in streaming scenarios.
+
+## Testing and Quality Assurance (76-80)
+
+[76. Unit_Testing_Generated_Code](docs/76_Unit_Testing_Generated_Code.md)<br>
+Strategies for testing protobuf-based code and mocking serialization.
+
+[77. Fuzz_Testing_Protobuf_Parsers](docs/77_Fuzz_Testing_Protobuf_Parsers.md)<br>
+Using libFuzzer and other tools to discover parser vulnerabilities.
+
+[78. Contract_Testing_with_Protobuf](docs/78_Contract_Testing_with_Protobuf.md)<br>
+Verifying API contracts between services using protobuf schemas.
+
+[79. Schema_Breaking_Change_Detection](docs/79_Schema_Breaking_Change_Detection.md)<br>
+Automated detection of incompatible schema changes in CI/CD pipelines.
+
+[80. Property_Based_Testing](docs/80_Property_Based_Testing.md)<br>
+Using property-based testing to verify serialization roundtrip properties.
+
+## Migration and Interoperability (81-85)
+
+[81. JSON_to_Protobuf_Migration](docs/81_JSON_to_Protobuf_Migration.md)<br>
+Strategies for migrating REST APIs from JSON to protobuf while maintaining compatibility.
+
+[82. XML_and_Protobuf_Coexistence](docs/82_XML_and_Protobuf_Coexistence.md)<br>
+Bridging legacy XML systems with modern protobuf-based services.
+
+[83. Thrift_to_Protobuf_Migration](docs/83_Thrift_to_Protobuf_Migration.md)<br>
+Migrating from Apache Thrift to Protocol Buffers with minimal disruption.
+
+[84. Avro_Comparison_and_Migration](docs/84_Avro_Comparison_and_Migration.md)<br>
+Understanding differences between Avro and Protobuf, and migration strategies.
+
+[85. FlatBuffers_vs_Protobuf_Tradeoffs](docs/85_FlatBuffers_vs_Protobuf_Tradeoffs.md)<br>
+When to use FlatBuffers over Protobuf for zero-copy, in-place access patterns.
+
+## Security Considerations (86-90)
+
+[86. Message_Size_Limits_and_DoS](docs/86_Message_Size_Limits_and_DoS.md)<br>
+Protecting against denial-of-service through message size validation and limits.
+
+[87. Malicious_Input_Handling](docs/87_Malicious_Input_Handling.md)<br>
+Defending against crafted messages designed to exploit parser bugs.
+
+[88. Authentication_in_Protobuf_Services](docs/88_Authentication_in_Protobuf_Services.md)<br>
+Integrating authentication tokens and credentials in service calls.
+
+[89. Encryption_and_Wire_Security](docs/89_Encryption_and_Wire_Security.md)<br>
+Transport-level security (TLS) vs message-level encryption for sensitive data.
+
+[90. Audit_Logging_Message_Content](docs/90_Audit_Logging_Message_Content.md)<br>
+Safely logging protobuf messages while redacting sensitive fields.
+
+## Build and Deployment (91-95)
+
+[91. Bazel_Integration_for_Protobuf](docs/91_Bazel_Integration_for_Protobuf.md)<br>
+Using Bazel build system with protobuf code generation and dependencies.
+
+[92. CMake_Protobuf_Configuration](docs/92_CMake_Protobuf_Configuration.md)<br>
+Integrating protobuf compilation into CMake-based C++ projects.
+
+[93. Maven_and_Gradle_Integration](docs/93_Maven_and_Gradle_Integration.md)<br>
+Java build tool configuration for protobuf compilation and dependencies.
+
+[94. Docker_and_Protobuf_Compilation](docs/94_Docker_and_Protobuf_Compilation.md)<br>
+Creating reproducible build environments for protobuf code generation.
+
+[95. CI_CD_Pipeline_Integration](docs/95_CI_CD_Pipeline_Integration.md)<br>
+Automating protobuf compilation, validation, and versioning in pipelines.
+
+## Specialized Use Cases (96-100)
+
+[96. Embedded_Systems_and_Nanopb](docs/96_Embedded_Systems_and_Nanopb.md)<br>
+Using nanopb for constrained embedded systems with limited memory and processing power.
+
+[97. Browser_and_WebAssembly_Usage](docs/97_Browser_and_WebAssembly_Usage.md)<br>
+Compiling protobuf to WebAssembly and using protobuf.js in browsers.
+
+[98. Database_Storage_with_Protobuf](docs/98_Database_Storage_with_Protobuf.md)<br>
+Storing serialized protobuf in databases, indexing strategies, and query patterns.
+
+[99. Message_Queues_and_Event_Streaming](docs/99_Message_Queues_and_Event_Streaming.md)<br>
+Using protobuf with Kafka, RabbitMQ, and other message queue systems.
+
+[100. GraphQL_and_Protobuf_Integration](docs/100_GraphQL_and_Protobuf_Integration.md)<br>
+Bridging GraphQL APIs with protobuf-based backend services and type mapping.
