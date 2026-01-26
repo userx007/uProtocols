@@ -842,4 +842,172 @@ async fn main(spawner: Spawner) {
     
     // Spawn tasks
     spawner.spawn(can_rx_task(rx)).unwrap();
-    spawner.spawn(can_tx_task(tx)).unwrap
+    spawner.spawn(can_tx_task(tx)).unwrap();
+}
+```
+
+### Example 3: Generic CAN Trait (Rust)
+
+```rust
+use std::fmt;
+
+/// Generic CAN frame trait
+pub trait CanFrame {
+    fn id(&self) -> u32;
+    fn data(&self) -> &[u8];
+    fn is_extended(&self) -> bool;
+    fn is_remote(&self) -> bool;
+}
+
+/// Generic CAN interface trait
+pub trait CanInterface {
+    type Error: fmt::Debug;
+    type Frame: CanFrame;
+    
+    fn send(&mut self, frame: &Self::Frame) -> Result<(), Self::Error>;
+    fn receive(&mut self) -> Result<Self::Frame, Self::Error>;
+    fn set_filters(&mut self, filters: &[(u32, u32)]) -> Result<(), Self::Error>;
+}
+
+/// Standard CAN frame implementation
+#[derive(Debug, Clone)]
+pub struct StandardFrame {
+    id: u32,
+    data: [u8; 8],
+    length: usize,
+    extended: bool,
+    remote: bool,
+}
+
+impl StandardFrame {
+    pub fn new(id: u32, data: &[u8], extended: bool) -> Result<Self, &'static str> {
+        if data.len() > 8 {
+            return Err("Data length exceeds 8 bytes");
+        }
+        
+        let mut frame_data = [0u8; 8];
+        frame_data[..data.len()].copy_from_slice(data);
+        
+        Ok(StandardFrame {
+            id,
+            data: frame_data,
+            length: data.len(),
+            extended,
+            remote: false,
+        })
+    }
+    
+    pub fn new_remote(id: u32, length: usize, extended: bool) -> Result<Self, &'static str> {
+        if length > 8 {
+            return Err("Length exceeds 8 bytes");
+        }
+        
+        Ok(StandardFrame {
+            id,
+            data: [0u8; 8],
+            length,
+            extended,
+            remote: true,
+        })
+    }
+}
+
+impl CanFrame for StandardFrame {
+    fn id(&self) -> u32 {
+        self.id
+    }
+    
+    fn data(&self) -> &[u8] {
+        &self.data[..self.length]
+    }
+    
+    fn is_extended(&self) -> bool {
+        self.extended
+    }
+    
+    fn is_remote(&self) -> bool {
+        self.remote
+    }
+}
+
+impl fmt::Display for StandardFrame {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(
+            f,
+            "CAN Frame: ID=0x{:03X}{}, Length={}, Data={:02X?}",
+            self.id,
+            if self.extended { " (ext)" } else { "" },
+            self.length,
+            self.data()
+        )
+    }
+}
+
+// Example usage with mock implementation
+pub struct MockCan {
+    tx_queue: Vec<StandardFrame>,
+    rx_queue: Vec<StandardFrame>,
+}
+
+impl MockCan {
+    pub fn new() -> Self {
+        MockCan {
+            tx_queue: Vec::new(),
+            rx_queue: Vec::new(),
+        }
+    }
+    
+    pub fn inject_rx_frame(&mut self, frame: StandardFrame) {
+        self.rx_queue.push(frame);
+    }
+}
+
+impl CanInterface for MockCan {
+    type Error = &'static str;
+    type Frame = StandardFrame;
+    
+    fn send(&mut self, frame: &Self::Frame) -> Result<(), Self::Error> {
+        self.tx_queue.push(frame.clone());
+        Ok(())
+    }
+    
+    fn receive(&mut self) -> Result<Self::Frame, Self::Error> {
+        self.rx_queue.pop().ok_or("No frames available")
+    }
+    
+    fn set_filters(&mut self, _filters: &[(u32, u32)]) -> Result<(), Self::Error> {
+        Ok(())
+    }
+}
+```
+
+## Summary
+
+**CAN Controller Integration** involves interfacing with hardware controllers to enable reliable communication on CAN bus networks. Key aspects include:
+
+### Hardware Controllers
+- **MCP2515**: SPI-based external controller for microcontrollers without built-in CAN, requires careful register configuration and timing
+- **SJA1000**: Legacy industrial controller with parallel/SPI interface, supports BasicCAN and PeliCAN modes
+- **Integrated MCU Peripherals**: Direct hardware access in STM32, ESP32, and NXP devices offering lower latency and multiple channels
+
+### Implementation Approaches
+- **Bare-metal/RTOS**: Direct register manipulation, interrupt handling, precise timing control
+- **HAL Libraries**: Hardware Abstraction Layers (STM32 HAL, ESP-IDF) simplify portability
+- **SocketCAN (Linux)**: Standard network socket interface for CAN, enables userspace applications
+- **Embedded Rust**: Type-safe, memory-safe implementations using Embassy or embedded-hal traits
+
+### Critical Considerations
+- **Bit Timing Configuration**: Calculate prescaler, time segments (Sync, Prop, Phase1, Phase2) for desired baud rate
+- **Message Filtering**: Hardware filters reduce CPU load by accepting only relevant CAN IDs
+- **Error Handling**: Monitor bus-off states, error counters, and implement recovery mechanisms
+- **Interrupt vs Polling**: Interrupts provide lower latency; polling is simpler but less efficient
+- **Thread Safety**: Protect shared resources in multi-threaded environments
+
+### Common Challenges
+- Incorrect bit timing causing communication failures
+- Buffer overflows from high message rates
+- Filter misconfiguration blocking wanted messages
+- Transceiver compatibility and termination resistance issues
+- Power management in sleep/wake scenarios
+
+CAN controller integration requires understanding both the hardware specifics and the protocol requirements to achieve reliable, real-time communication in automotive, industrial, and embedded systems.
