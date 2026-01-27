@@ -695,3 +695,97 @@ fn main() -> io::Result<()> {
     client.disconnect(None)?;
     
     Ok(())
+}
+```
+
+### Advanced Rust Example: MQTT-SN with Async Support
+
+```rust
+use tokio::net::UdpSocket;
+use tokio::time::{timeout, Duration};
+use std::sync::Arc;
+
+pub struct AsyncMqttSnClient {
+    socket: Arc<UdpSocket>,
+    gateway_addr: String,
+    msg_id: u16,
+    client_id: String,
+}
+
+impl AsyncMqttSnClient {
+    pub async fn new(gateway_addr: &str, client_id: &str) -> io::Result<Self> {
+        let socket = UdpSocket::bind("0.0.0.0:0").await?;
+        
+        Ok(AsyncMqttSnClient {
+            socket: Arc::new(socket),
+            gateway_addr: gateway_addr.to_string(),
+            msg_id: 1,
+            client_id: client_id.to_string(),
+        })
+    }
+    
+    pub async fn connect(&self, keep_alive: u16, clean_session: bool) -> io::Result<()> {
+        let mut buffer = Vec::new();
+        let flags = if clean_session { MQTTSN_FLAG_CLEAN_SESSION } else { 0 };
+        let client_id_bytes = self.client_id.as_bytes();
+        let length = (6 + client_id_bytes.len()) as u8;
+        
+        buffer.push(length);
+        buffer.push(MQTTSN_CONNECT);
+        buffer.push(flags);
+        buffer.push(0x01);
+        buffer.extend_from_slice(&keep_alive.to_be_bytes());
+        buffer.extend_from_slice(client_id_bytes);
+        
+        self.socket.send_to(&buffer, &self.gateway_addr).await?;
+        
+        let mut recv_buffer = [0u8; 256];
+        let result = timeout(
+            Duration::from_secs(5),
+            self.socket.recv_from(&mut recv_buffer)
+        ).await;
+        
+        match result {
+            Ok(Ok((amt, _))) if amt >= 3 && recv_buffer[1] == MQTTSN_CONNACK => {
+                if recv_buffer[2] == MQTTSN_RC_ACCEPTED {
+                    println!("Connected successfully");
+                    Ok(())
+                } else {
+                    Err(Error::new(ErrorKind::ConnectionRefused, "Connection rejected"))
+                }
+            }
+            _ => Err(Error::new(ErrorKind::TimedOut, "Connection timeout")),
+        }
+    }
+    
+    pub async fn publish_async(
+        &mut self,
+        topic_id: u16,
+        data: &[u8],
+        qos: QoS,
+    ) -> io::Result<()> {
+        let mut buffer = Vec::new();
+        let length = (7 + data.len()) as u8;
+        
+        buffer.push(length);
+        buffer.push(MQTTSN_PUBLISH);
+        buffer.push(qos.to_flag());
+        buffer.extend_from_slice(&topic_id.to_be_bytes());
+        buffer.extend_from_slice(&self.msg_id.to_be_bytes());
+        buffer.extend_from_slice(data);
+        
+        self.socket.send_to(&buffer, &self.gateway_addr).await?;
+        self.msg_id += 1;
+        
+        Ok(())
+    }
+}
+```
+
+## Summary
+
+MQTT-SN is a lightweight messaging protocol specifically engineered for constrained sensor networks where standard MQTT's TCP requirements would be prohibitive. Operating over UDP and other low-overhead transports, it achieves significant bandwidth savings through compact 2-4 byte headers and topic ID mapping that replaces verbose topic strings with 2-byte identifiers.
+
+The protocol's architecture centers on gateways that bridge MQTT-SN devices to standard MQTT brokers, enabling seamless integration with existing infrastructure. Critical features for battery-powered sensors include native sleep mode support with message buffering, gateway discovery mechanisms, and flexible Quality of Service levels adapted for connectionless communication.
+
+MQTT-SN maintains compatibility with MQTT's publish/subscribe model while introducing protocol enhancements like topic registration, predefined topics, and special handling for sleeping clients. This makes it ideal for wireless sensor networks, IoT edge devices, and any application where minimizing power consumption and bandwidth usage is paramount while maintaining reliable message delivery and interoperability with standard MQTT systems.
