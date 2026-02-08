@@ -1,0 +1,15 @@
+[package]
+name = "arp_implementation"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+# Optional: For actual network packet manipulation
+# pnet = "0.34"
+# pnet_datalink = "0.34"
+# pnet_packet = "0.34"
+
+# For async operations (optional)
+# tokio = { version = "1", features = ["full"] }
+
+[dev-dependencies]
