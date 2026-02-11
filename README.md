@@ -79,3 +79,16 @@ UDP is ideal for scenarios where speed is more critical than reliability.
 ---
 
 [**gRPC**](gRPC/README.md)<br>
+**gRPC** (gRPC Remote Procedure Call) is a modern, high-performance, open-source RPC (Remote Procedure Call) framework developed by Google. It enables client and server applications to communicate transparently and build connected systems.
+
+---
+
+[**CommonAPI**](CommonAPI/README.md)<br>
+**CommonAPI** is a C++-based Inter-Process Communication (IPC) framework primarily used in automotive and embedded systems. 
+It provides a language-independent middleware abstraction layer that enables communication between different software components across process boundaries.
+
+---
+
+[**SOME/IP**](SomeIp/README.md)<br>
+**SOME/IP (Scalable service-Oriented MiddlewarE over IP)** is an automotive middleware solution designed for control messages in automotive Ethernet networks. 
+Developed by BMW and standardized by AUTOSAR, it enables service-oriented communication between Electronic Control Units (ECUs) in modern vehicles.
