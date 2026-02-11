@@ -92,3 +92,9 @@ It provides a language-independent middleware abstraction layer that enables com
 [**SOME/IP**](SomeIp/README.md)<br>
 **SOME/IP (Scalable service-Oriented MiddlewarE over IP)** is an automotive middleware solution designed for control messages in automotive Ethernet networks. 
 Developed by BMW and standardized by AUTOSAR, it enables service-oriented communication between Electronic Control Units (ECUs) in modern vehicles.
+
+---
+
+[**REST**](REST/README.md)<br>
+**REST (Representational State Transfer)** is an architectural style for designing networked applications. 
+REST defines a set of constraints that, when applied to web services, create scalable, stateless, and cacheable systems.
