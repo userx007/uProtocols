@@ -408,3 +408,6 @@ Bridging GraphQL APIs with protobuf-based backend services and type mapping.
 [101. Protocol Buffers Tutorial - C++ and Rust](docs/101_Setting_Up_Basic_Project.md)<br>
 A complete hands-on tutorial for learning Protocol Buffers with C++ and Rust implementations.
 
+[102. Protocol Buffers Schema Evolution Example](docs/102_Protocol_Buffers_Schema_Evolution_Example.md)<br>
+Different modification scenarios
+
