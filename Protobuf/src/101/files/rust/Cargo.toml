@@ -1,0 +1,19 @@
+[package]
+name = "protobuf-tutorial"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+prost = "0.12"
+bytes = "1.5"
+
+[build-dependencies]
+prost-build = "0.12"
+
+[[bin]]
+name = "writer"
+path = "src/bin/writer.rs"
+
+[[bin]]
+name = "reader"
+path = "src/bin/reader.rs"

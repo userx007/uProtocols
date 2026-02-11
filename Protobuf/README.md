@@ -22,7 +22,7 @@ Key differences between proto2 and proto3 syntax, including required/optional fi
 [05. Zero_Copy_Deserialization_Concepts](docs/05_Zero_Copy_Deserialization_Concepts.md)<br>
 Understanding how protobuf implementations can achieve zero-copy parsing for improved performance.
 
-
+---
 
 ## Message Definition & Schema Design (06-10)
 How to define and structure protobuf messages effectively.
@@ -43,7 +43,7 @@ Implementing discriminated unions using oneof fields to represent mutually exclu
 [10. Map_Fields_and_Key_Value_Pairs](docs/10_Map_Fields_and_Key_Value_Pairs.md)<br>
 Using map<K,V> syntax for efficient key-value storage and its wire format representation.
 
-
+---
 
 ## Data Types & Field Rules (11-15)
 Understanding protobuf's type system and field modifiers.
@@ -64,7 +64,7 @@ Creating enumerations, default values, and handling unknown enum values in diffe
 [15. Optional_Required_Repeated_Modifiers](docs/15_Optional_Required_Repeated_Modifiers.md)<br>
 Field cardinality rules, their evolution from proto2 to proto3, and backward compatibility implications.
 
-
+---
 
 ## Serialization & Encoding (16-20)
 Deep dive into the wire format and encoding mechanisms.
@@ -85,7 +85,7 @@ Using packed=true for efficient encoding of repeated primitive fields.
 [20. Length_Delimited_Messages](docs/20_Length_Delimited_Messages.md)<br>
 Understanding length-prefixed encoding for strings, bytes, and nested messages.
 
-
+---
 
 ## Schema Evolution & Versioning (21-25)
 Managing schema changes and maintaining compatibility.
@@ -106,7 +106,7 @@ Best practices for extending messages without breaking existing code.
 [25. Deprecating_Fields_Strategy](docs/25_Deprecating_Fields_Strategy.md)<br>
 Using deprecated=true option and migration paths for removing fields.
 
-
+---
 
 ## Language Integration & Code Generation (26-30)
 Working with protoc compiler and generated code.
@@ -127,7 +127,7 @@ Creating custom protoc plugins to generate additional code or documentation.
 [30. Language_Specific_API_Patterns](docs/30_Language_Specific_API_Patterns.md)<br>
 Understanding how different languages expose protobuf APIs builders in Java, traits in Rust, properties in C#.
 
-
+---
 
 ## Performance & Optimization (31-35)
 Techniques for optimizing protobuf performance.
@@ -148,7 +148,7 @@ Deferring deserialization of nested messages until accessed for performance gain
 [35. String_Piece_and_Cord_Optimizations](docs/35_String_Piece_and_Cord_Optimizations.md)<br>
 Advanced string handling techniques to avoid copying in C++ implementations.
 
-
+---
 
 ## Best Practices & Patterns (36-40)
 Industry best practices and design patterns.
@@ -169,7 +169,7 @@ Following protobuf style guide CamelCase for messages, underscore_case for field
 [40. Package_Organization_Patterns](docs/40_Package_Organization_Patterns.md)<br>
 Structuring proto files with packages, imports, and avoiding circular dependencies.
 
-
+---
 
 ## Advanced Features (41-45)
 Advanced protobuf features and well-known types.
@@ -190,7 +190,7 @@ Using google.protobuf.FieldMask to specify which fields to update in PATCH opera
 [45. Struct_and_Value_for_JSON_Like_Data](docs/45_Struct_and_Value_for_JSON_Like_Data.md)<br>
 Handling dynamic/schemaless data using google.protobuf.Struct and Value types.
 
-
+---
 
 ## Tooling & Ecosystem (46-50)
 Tools and integrations in the protobuf ecosystem.
@@ -211,6 +211,8 @@ Human-readable text format for debugging, testing, and configuration files.
 [50. Integration_with_gRPC_Services](docs/50_Integration_with_gRPC_Services.md)<br>
 Using protobuf as the IDL for gRPC, service definitions, and streaming patterns.. 
 
+---
+
 ## Language-Specific Implementation (51-55)
 
 [51. CPP_Implementation_Details](docs/51_CPP_Implementation_Details.md)<br>
@@ -227,6 +229,8 @@ Working with protoc-gen-go, grpc-gateway, and idiomatic Go protobuf code.
 
 [55. Rust_Prost_and_Protobuf](docs/55_Rust_Prost_and_Protobuf.md)<br>
 Using prost for Rust protobuf generation, serde integration, and ownership patterns.
+
+---
 
 ## Advanced Schema Design (56-60)
 
@@ -245,6 +249,8 @@ Designing immutable event messages for event sourcing architectures.
 [60. CQRS_Command_and_Query_Models](docs/60_CQRS_Command_and_Query_Models.md)<br>
 Separating command and query message definitions for CQRS patterns.
 
+---
+
 ## Validation and Constraints (61-65)
 
 [61. Protoc_gen_validate_Integration](docs/61_Protoc_gen_validate_Integration.md)<br>
@@ -261,6 +267,8 @@ Validating interdependent fields and complex business rules.
 
 [65. Validation_Error_Reporting](docs/65_Validation_Error_Reporting.md)<br>
 Structured error messages and field path reporting for validation failures.
+
+---
 
 ## RPC and Service Definition (66-70)
 
@@ -279,6 +287,8 @@ Defining error response messages, status codes, and error details using google.r
 [70. Service_Versioning_Strategies](docs/70_Service_Versioning_Strategies.md)<br>
 Managing multiple service versions, deprecation paths, and backward compatibility.
 
+---
+
 ## Wire Format Advanced Topics (71-75)
 
 [71. Unknown_Field_Handling](docs/71_Unknown_Field_Handling.md)<br>
@@ -295,6 +305,8 @@ When and how to apply gzip, snappy, or LZ4 compression to protobuf messages.
 
 [75. Delta_Encoding_Patterns](docs/75_Delta_Encoding_Patterns.md)<br>
 Encoding only changed fields for efficient updates in streaming scenarios.
+
+---
 
 ## Testing and Quality Assurance (76-80)
 
@@ -313,6 +325,8 @@ Automated detection of incompatible schema changes in CI/CD pipelines.
 [80. Property_Based_Testing](docs/80_Property_Based_Testing.md)<br>
 Using property-based testing to verify serialization roundtrip properties.
 
+---
+
 ## Migration and Interoperability (81-85)
 
 [81. JSON_to_Protobuf_Migration](docs/81_JSON_to_Protobuf_Migration.md)<br>
@@ -329,6 +343,8 @@ Understanding differences between Avro and Protobuf, and migration strategies.
 
 [85. FlatBuffers_vs_Protobuf_Tradeoffs](docs/85_FlatBuffers_vs_Protobuf_Tradeoffs.md)<br>
 When to use FlatBuffers over Protobuf for zero-copy, in-place access patterns.
+
+---
 
 ## Security Considerations (86-90)
 
@@ -347,6 +363,8 @@ Transport-level security (TLS) vs message-level encryption for sensitive data.
 [90. Audit_Logging_Message_Content](docs/90_Audit_Logging_Message_Content.md)<br>
 Safely logging protobuf messages while redacting sensitive fields.
 
+---
+
 ## Build and Deployment (91-95)
 
 [91. Bazel_Integration_for_Protobuf](docs/91_Bazel_Integration_for_Protobuf.md)<br>
@@ -364,6 +382,8 @@ Creating reproducible build environments for protobuf code generation.
 [95. CI_CD_Pipeline_Integration](docs/95_CI_CD_Pipeline_Integration.md)<br>
 Automating protobuf compilation, validation, and versioning in pipelines.
 
+---
+
 ## Specialized Use Cases (96-100)
 
 [96. Embedded_Systems_and_Nanopb](docs/96_Embedded_Systems_and_Nanopb.md)<br>
@@ -380,3 +400,11 @@ Using protobuf with Kafka, RabbitMQ, and other message queue systems.
 
 [100. GraphQL_and_Protobuf_Integration](docs/100_GraphQL_and_Protobuf_Integration.md)<br>
 Bridging GraphQL APIs with protobuf-based backend services and type mapping.
+
+---
+
+## Miscelaneous
+
+[101. Protocol Buffers Tutorial - C++ and Rust](docs/101_Setting_Up_Basic_Project.md)<br>
+A complete hands-on tutorial for learning Protocol Buffers with C++ and Rust implementations.
+
