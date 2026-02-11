@@ -1,5 +1,3 @@
-I'll provide you with a comprehensive tutorial for setting up Protocol Buffers projects in both C++ and Rust on Linux.
-
 ## Prerequisites & Downloads
 
 ### 1. Install Protocol Buffer Compiler (protoc)

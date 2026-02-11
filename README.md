@@ -75,3 +75,7 @@ It was **developed in the 1980s by David P. Reed** as part of the original TCP/I
 Unlike TCP, UDP does not guarantee delivery, order, or error correction, making it lightweight and low-latency.
 It is commonly used in applications like video streaming, online gaming, and DNS queries.
 UDP is ideal for scenarios where speed is more critical than reliability.
+
+---
+
+[**gRPC**](gRPC/README.md)<br>
