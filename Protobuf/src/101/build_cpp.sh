@@ -29,18 +29,6 @@ echo ""
 # Return to root
 cd ../..
 
-# Build Rust
-if command -v cargo &> /dev/null; then
-    echo "Building Rust project..."
-    cd rust
-    cargo build --release || { echo "Cargo build failed!"; exit 1; }
-    echo "✓ Rust build successful"
-    cd ..
-else
-    echo "⚠ Cargo not found, skipping Rust build"
-    echo "Install Rust from: https://rustup.rs/"
-fi
-
 echo ""
 echo "==================================="
 echo "Build complete! Try these commands:"
@@ -50,9 +38,4 @@ echo "C++:"
 echo "  cd cpp/build"
 echo "  ./writer"
 echo "  ./reader"
-echo ""
-echo "Rust:"
-echo "  cd rust"
-echo "  cargo run --bin writer --release"
-echo "  cargo run --bin reader --release"
 echo ""
