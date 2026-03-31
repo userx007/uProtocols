@@ -1,7 +1,7 @@
 
 # 72. CAN Logging and Trace Systems
 
-![can_logging_trace_systems](images/can_logging_trace_systems.svg)<br>
+![can_logging_trace_systems](../images/can_logging_trace_systems.svg)<br>
 
 
 ### What it is

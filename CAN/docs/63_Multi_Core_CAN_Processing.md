@@ -65,15 +65,15 @@ The central challenge is **safe, efficient inter-core communication**. Naive loc
 └───────────────┬────────────────┬────────────────────────────────┘
                 │ IRQ            │ IRQ
                 ▼                ▼
-┌───────────────────┐    ┌───────────────────┐
+┌───────────────────┐    ┌────────────────────┐
 │   Core 0          │    │   Core 1           │
 │  (IRQ Handler /   │    │  (IRQ Handler /    │
 │   RX Producer)    │    │   RX Producer)     │
 │                   │    │                    │
 │  SPSC Ring Buf ──►│    │  SPSC Ring Buf ──► │
 └────────┬──────────┘    └────────┬───────────┘
-         │ lock-free enqueue       │ lock-free enqueue
-         ▼                         ▼
+         │ lock-free enqueue      │ lock-free enqueue
+         ▼                        ▼
 ┌─────────────────────────────────────────────┐
 │           MPMC Dispatch Queue               │
 │        (shared between all workers)         │

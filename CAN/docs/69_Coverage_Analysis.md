@@ -10,7 +10,7 @@ There are two orthogonal dimensions of coverage to track:
 
 Here is how the two dimensions layer together across a CAN stack:
 
-![can_coverage_analysis_architecture](images/can_coverage_analysis_architecture.svg)<br>
+![can_coverage_analysis_architecture](../images/can_coverage_analysis_architecture.svg)<br>
 
 ---
 

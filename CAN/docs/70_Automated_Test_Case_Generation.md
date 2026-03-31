@@ -4,7 +4,7 @@ Automated Test Case Generation (ATCG) for CAN systems applies formal testing met
 
 Let me start with the overall architecture of a CAN automated test suite generator:
 
-![can_atcg_pipeline](images/can_atcg_pipeline.svg)<br>
+![can_atcg_pipeline](../images/can_atcg_pipeline.svg)<br>
 
 ---
 

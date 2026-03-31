@@ -10,7 +10,7 @@ Its two core functions are **measurement** (reading ECU internal variables at hi
 
 Let me start with the protocol's structural layout:
 
-![xcp_over_can_architecture](images/xcp_over_can_architecture.svg)<br>
+![xcp_over_can_architecture](../images/xcp_over_can_architecture.svg)<br>
 
 
 ### Key concepts
@@ -35,7 +35,7 @@ Let me start with the protocol's structural layout:
 
 A full session proceeds through well-defined phases: connect → identify → configure DAQ → start → measure → stop → disconnect.
 
-![xcp_session_flow](images/xcp_session_flow.svg)<br>
+![xcp_session_flow](../images/xcp_session_flow.svg)<br>
 
 
 ---
