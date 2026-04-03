@@ -65,7 +65,7 @@ Both the ENC28J60 and W5500 connect to a host MCU using the standard 4-wire SPI 
 MCU                          Ethernet Chip
 -----                        -------------
 MOSI  ─────────────────────► MOSI / SI
-MISO  ◄─────────────────────  MISO / SO
+MISO  ◄───────────────────── MISO / SO
 SCLK  ─────────────────────► SCLK / SCLK
 CS    ─────────────────────► CS / /SS
 ```
