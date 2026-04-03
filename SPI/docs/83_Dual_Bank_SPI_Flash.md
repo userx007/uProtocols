@@ -101,15 +101,15 @@ Power On / Reset
          │
          ▼
 ┌─────────────────────┐      ┌──────────────────────┐
-│  Pending update?    │─ Yes─▶  Verify new bank CRC  │
+│  Pending update?    │─ Yes─▶  Verify new bank CRC │
 └────────┬────────────┘      └──────────┬───────────┘
          │ No                           │
          │                    Valid? ───┼─── No ──▶ Clear pending, keep active bank
-         │                             │ Yes
-         │                             ▼
+         │                              │ Yes
+         │                              ▼
          │                  ┌─────────────────────┐
-         │                  │  Switch active bank  │
-         │                  │  Reset boot counter  │
+         │                  │  Switch active bank │
+         │                  │  Reset boot counter │
          │                  └──────────┬──────────┘
          │                             │
          ▼                             ▼
@@ -1139,8 +1139,8 @@ if (new_hdr.version < meta.sequence) {
 
 ```
          ┌──────────────────────────────────────┐
-         │           IDLE (confirmed)            │
-         │  active = A, confirmed = 1            │
+         │           IDLE (confirmed)           │
+         │  active = A, confirmed = 1           │
          └───────────┬──────────────────────────┘
                      │  OTA update arrives
                      ▼
