@@ -15,13 +15,14 @@ After every 8 bits of data transmitted on the I2C bus, the transmitter releases 
 
 ### Timing Diagram
 
-```
+```          
+             1       2       3       4       5       6       7       8       9
 Clock:  ___/‾‾‾\___/‾‾‾\___/‾‾‾\___/‾‾‾\___/‾‾‾\___/‾‾‾\___/‾‾‾\___/‾‾‾\___/‾‾‾\___
-Data:   D7  D6  D5  D4  D3  D2  D1  D0  ACK/NACK
+Data:        D7     D6       D5      D4      D3      D2      D1      D0    ACK/NACK
 SDA:    ___/‾‾‾\___/‾‾‾\___/‾‾‾\___/‾‾‾\___/‾‾‾\___/‾‾‾\___/‾‾‾\___/‾‾‾\_______
-                                                                        ^
-                                                                    9th clock
-                                                                   (ACK bit)
+                                                                             ^
+                                                                          9th clock
+                                                                         (ACK bit)
 ```
 
 ### When ACK is Sent
