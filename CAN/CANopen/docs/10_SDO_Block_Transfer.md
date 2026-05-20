@@ -1,4 +1,4 @@
-## 1. Introduction
+# CANopen SDO Block Transfer
 
 1. **Introduction** — what block transfer is and why it exists
 2. **Segmented vs. Block overview** — ASCII protocol flow diagrams comparing both approaches
@@ -17,8 +17,6 @@
     - Full firmware update sequence using CiA 302 Program Download objects
 11. **Error handling** — abort codes table and handling flowchart
 12. **Summary** — comparison table, protocol state machine in ASCII, and six key practical takeaways
-
-# CANopen SDO Block Transfer
 
 ## Table of Contents
 
@@ -49,6 +47,9 @@
 12. [Summary](#12-summary)
 
 ---
+
+## 1. Introduction
+
 
 The **SDO Block Transfer** is an advanced CANopen communication mechanism defined in
 **CiA 301** (CANopen Application Layer and Communication Profile). It extends the basic

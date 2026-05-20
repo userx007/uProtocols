@@ -12,7 +12,6 @@
 - **Worked Example** — byte-level trace of a 10-byte segmented upload ("MyDevice01")
 - **Summary** — ASCII quick-reference table of all key concepts
 
-
 ---
 
 ## Table of Contents

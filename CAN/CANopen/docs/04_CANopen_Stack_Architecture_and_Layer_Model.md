@@ -1,9 +1,5 @@
 # 04. CANopen Stack Architecture & Layer Model
 
-Now let me create the markdown document directly:The document covers all requested topics. Here's what's inside:
-
-**Structure (10 sections, ~600 lines):**
-
 - **CiA 301 Overview** — table of all major services (NMT, PDO, SDO, SYNC, EMCY, TIME, HB, LSS) with companion profile references.
 - **OSI Layer Mapping** — full ASCII diagram showing where CAN (L1/L2) ends and CANopen begins (L3/L4/L7), with a note on the intentional gaps.
 - **Four-Layer Architecture** — detailed ASCII stack diagram (Hardware → HAL → Stack → Application), including the RX dispatcher COB-ID range table and the predefined connection set.

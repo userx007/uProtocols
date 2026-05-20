@@ -1,10 +1,5 @@
 # 05 — NMT State Machine & Network Management
 
-> **CANopen Series · Chapter 5**
-> Protocol reference: CiA 301 v4.2 · DS-301
-
----
-
 ## Table of Contents
 
 1. [Overview](#1-overview)

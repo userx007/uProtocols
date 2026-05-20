@@ -1,25 +1,13 @@
 # 06 · COB-ID Scheme & Predefined Connection Set
 
-**Structure overview:**
-
 1. **11-bit ID Composition** — ASCII bit-field diagrams showing how the 4-bit Function Code and 7-bit Node-ID combine, with the exact formula `COB-ID = (FC << 7) | NID`
-
 2. **Function Code Table** — all 16 FC slots mapped to their CANopen object type (TPDO, RPDO, SDO, EMCY, Heartbeat, etc.) with hex base addresses
-
 3. **Predefined Connection Set** — full table of default COB-IDs for all Node-IDs, plus an ASCII visualisation of the entire 0x000–0x7FF ID space partitioned into bands
-
 4. **COB-ID Conflict Detection** — ASCII diagrams of duplicate-NodeID and misconfig scenarios, explanation of the validity bit (bit 31), and a sorting-based conflict detector in C
-
 5. **Dynamic vs. Static Assignment** — ASCII flow diagrams for both approaches, plus the full 5-step SDO reconfiguration procedure (disable → write → enable → verify)
-
 6. **CAN Filter Configuration** — filter formula, mask semantics, three named strategies (exact, band, wildcard), and STM32 bxCAN register layout with a complete slave filter setup function
-
 7. **C/C++ Code Examples** — `canopen_cobid.h`, `canopen_pcs.c`, `canopen_conflict.c`, `CanopenCobidManager` (C++17), and `canopen_filter.c` with STM32 HAL integration
-
 8. **Summary table** with OD index references and links to the relevant CiA standards
-
-> **CANopen Application Layer — CiA 301**
-> Document version 1.0 · Topic 06 of the CANopen series
 
 ---
 
