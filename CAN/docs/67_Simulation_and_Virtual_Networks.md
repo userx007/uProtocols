@@ -10,6 +10,7 @@ Linux's `vcan` (virtual CAN) driver is the workhorse of software-only CAN develo
 
 **Setting up the virtual interface** (shell, must be done once per boot or in a udev rule):
 
+
 ```bash
 # Load the kernel modules
 sudo modprobe vcan
@@ -31,6 +32,58 @@ candump vcan0
 
 # Inject a test frame
 cansend vcan0 123#DEADBEEF01020304
+```
+
+---
+`candump` is part of the Linux CAN utilities package (`can-utils`).
+
+Install it depending on your distro:
+
+* Debian/Ubuntu:
+```bash
+sudo apt update
+sudo apt install can-utils
+```
+
+* Fedora:
+```bash
+sudo dnf install can-utils
+```
+
+* Arch:
+```bash
+sudo pacman -S can-utils
+```
+
+* openSUSE:
+```bash
+sudo zypper install canutils
+```
+
+Then verify:
+```bash
+candump --help
+```
+
+Typical usage:
+```bash
+candump can0
+```
+
+If you also get errors like `can0: No such device`, you may need to:
+
+1. Enable SocketCAN kernel modules
+2. Create/configure the CAN interface
+3. Bring the interface up
+
+Example:
+```bash
+sudo ip link set can0 up type can bitrate 500000
+```
+
+And check:
+```bash
+ip link show
 ```
 
 ---
