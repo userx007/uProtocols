@@ -86,13 +86,13 @@ and the only one recommended for new designs:
  ┌─────────────────────┬──────────────────────────────┬──────────────────────────────┐
  │ Feature             │ Node Guarding (legacy)       │ Heartbeat (current)          │
  ├─────────────────────┼──────────────────────────────┼──────────────────────────────┤
- │ Direction           │ Master polls, node responds   │ Node broadcasts autonomously │
- │ CAN traffic         │ RTR + response = 2 frames     │ 1 frame per interval         │
- │ Master dependency   │ Requires NMT master polling   │ Any node can consume         │
- │ Toggle bit          │ Yes – must alternate          │ No                           │
- │ Boot-up signal      │ No                            │ Yes (state byte = 0x00)      │
- │ OD entries          │ 0x100C / 0x100D               │ 0x1016 / 0x1017              │
- │ Recommended         │ No (deprecated)               │ Yes                          │
+ │ Direction           │ Master polls, node responds  │ Node broadcasts autonomously │
+ │ CAN traffic         │ RTR + response = 2 frames    │ 1 frame per interval         │
+ │ Master dependency   │ Requires NMT master polling  │ Any node can consume         │
+ │ Toggle bit          │ Yes – must alternate         │ No                           │
+ │ Boot-up signal      │ No                           │ Yes (state byte = 0x00)      │
+ │ OD entries          │ 0x100C / 0x100D              │ 0x1016 / 0x1017              │
+ │ Recommended         │ No (deprecated)              │ Yes                          │
  └─────────────────────┴──────────────────────────────┴──────────────────────────────┘
 ```
 
@@ -152,12 +152,12 @@ It is an array where each sub-index describes one monitored node.
 ```
  Object 0x1016 – Consumer Heartbeat Time
  ┌────────────┬──────────┬──────────────────────────────────────────────────────────┐
- │ Sub-index  │ Type     │ Description                                               │
+ │ Sub-index  │ Type     │ Description                                              │
  ├────────────┼──────────┼──────────────────────────────────────────────────────────┤
- │ 0x00       │ UINT8    │ Number of entries (max supported consumers)               │
- │ 0x01..N    │ UINT32   │ Bits 31..24: reserved (0)                                 │
- │            │          │ Bits 23..16: Node-ID of the producer to watch (1..127)    │
- │            │          │ Bits 15..0 : Consumer heartbeat timeout [ms]              │
+ │ 0x00       │ UINT8    │ Number of entries (max supported consumers)              │
+ │ 0x01..N    │ UINT32   │ Bits 31..24: reserved (0)                                │
+ │            │          │ Bits 23..16: Node-ID of the producer to watch (1..127)   │
+ │            │          │ Bits 15..0 : Consumer heartbeat timeout [ms]             │
  └────────────┴──────────┴──────────────────────────────────────────────────────────┘
 ```
 
@@ -183,9 +183,9 @@ Example layout for monitoring three nodes:
 ```
  Heartbeat CAN Frame
  ┌────────────────────────────────────────────────────────────────────┐
- │  COB-ID  =  0x700 + Node-ID  (fixed, not configurable)            │
+ │  COB-ID  =  0x700 + Node-ID  (fixed, not configurable)             │
  │  DLC     =  1                                                      │
- │  Data[0] =  NMT State Code (see table in section 6.1)             │
+ │  Data[0] =  NMT State Code (see table in section 6.1)              │
  └────────────────────────────────────────────────────────────────────┘
 
  Example  – Node 7 is Operational:
@@ -207,12 +207,12 @@ Example layout for monitoring three nodes:
 
 ```
  ┌──────────────────────┬───────────┬───────────────────────────────────────────────┐
- │ State                │ Code      │ Description                                    │
+ │ State                │ Code      │ Description                                   │
  ├──────────────────────┼───────────┼───────────────────────────────────────────────┤
- │ Boot-Up              │ 0x00      │ One-time message after power-on / reset        │
- │ Stopped              │ 0x04      │ Only NMT and heartbeat CAN traffic allowed     │
- │ Operational          │ 0x05      │ Full CANopen communication active              │
- │ Pre-Operational      │ 0x7F      │ SDO active; PDO communication disabled         │
+ │ Boot-Up              │ 0x00      │ One-time message after power-on / reset       │
+ │ Stopped              │ 0x04      │ Only NMT and heartbeat CAN traffic allowed    │
+ │ Operational          │ 0x05      │ Full CANopen communication active             │
+ │ Pre-Operational      │ 0x7F      │ SDO active; PDO communication disabled        │
  └──────────────────────┴───────────┴───────────────────────────────────────────────┘
 ```
 
@@ -223,14 +223,14 @@ Example layout for monitoring three nodes:
                                 │
                                 ▼
                       ┌─────────────────┐
-                      │  Initialisation  │  (internal, no heartbeat yet)
-                      │  (not visible)   │
+                      │  Initialisation │  (internal, no heartbeat yet)
+                      │  (not visible)  │
                       └────────┬────────┘
                                │  Send Boot-Up message (0x00)
                                │
                                ▼
                     ┌──────────────────────┐
-                    │    PRE-OPERATIONAL    │◄──────────────────────────────┐
+                    │    PRE-OPERATIONAL   │◄───────────────────────────────┐
                     │      (0x7F)          │                                │
                     └──────────────────────┘                                │
                       │               ▲                                     │
@@ -238,7 +238,7 @@ Example layout for monitoring three nodes:
           Remote Node │               │  (0x80)                             │
                       ▼               │                                     │
                     ┌──────────────────────┐                                │
-                    │    OPERATIONAL        │                                │
+                    │    OPERATIONAL       │                                │
                     │      (0x05)          │                                │
                     └──────────────────────┘                                │
                       │               ▲                                     │
@@ -246,14 +246,14 @@ Example layout for monitoring three nodes:
           Remote Node │               │  (from Stopped)                     │
           (0x02)      ▼               │                                     │
                     ┌──────────────────────┐                                │
-                    │      STOPPED          │────────────────────────────────┘
+                    │      STOPPED         │────────────────────────────────┘
                     │      (0x04)          │   NMT Enter Pre-Op (0x80)
                     └──────────────────────┘
                                │
                                │  NMT Reset Node (0x81) / Reset Comm (0x82)
                                ▼
                       ┌─────────────────┐
-                      │  Initialisation  │  (restart cycle)
+                      │  Initialisation │  (restart cycle)
                       └─────────────────┘
 
  NMT Command Codes:
@@ -339,32 +339,32 @@ action. The appropriate strategy depends on the system's safety requirements:
      ┌──────┴──────────────────────────┐
      │                                 │
      ▼                                 ▼
- ┌──────────────┐               ┌─────────────────┐
+ ┌──────────────┐               ┌──────────────────┐
  │  Safety-     │               │  Non-critical    │
  │  Critical    │               │  node            │
  └──────┬───────┘               └──────┬───────────┘
         │                              │
         ▼                              ▼
- ┌──────────────┐               ┌─────────────────┐
+ ┌──────────────┐               ┌──────────────────┐
  │  Enter safe  │               │  Retry: send     │
  │  state /     │               │  NMT Reset Node  │
  │  emergency   │               │  (0x81) to N     │
  │  stop        │               └──────┬───────────┘
  └──────────────┘                      │
                                        ▼
-                                ┌─────────────────┐
+                                ┌──────────────────┐
                                 │  Wait for        │
-                                │  Boot-Up (0x00) │
+                                │  Boot-Up (0x00)  │
                                 │  from node N     │
                                 └──────┬───────────┘
                                        │
-                          ┌────────────┴──────────────┐
+                          ┌────────────┴───────────────┐
                           │                            │
                           ▼                            ▼
                    ┌──────────────┐           ┌──────────────┐
                    │  Boot-Up     │           │  No Boot-Up  │
-                   │  received    │           │  within       │
-                   │              │           │  deadline     │
+                   │  received    │           │  within      │
+                   │              │           │  deadline    │
                    └──────┬───────┘           └──────┬───────┘
                           │                          │
                           ▼                          ▼
@@ -865,7 +865,7 @@ void canopen_1ms_tick(void)
  ├────┼─────────────────────────────┼────────────────────────────────────────────────┤
  │ 3  │ Consumer not started until  │ Start consumer timer only after first          │
  │    │ first message received      │ heartbeat is received, not at power-on, to     │
- │    │                             │ avoid false alarms during network startup       │
+ │    │                             │ avoid false alarms during network startup      │
  ├────┼─────────────────────────────┼────────────────────────────────────────────────┤
  │ 4  │ Same COB-ID from two nodes  │ Ensure each node has a unique Node-ID;         │
  │    │ (Node-ID conflict)          │ use LSS protocol to assign IDs                 │

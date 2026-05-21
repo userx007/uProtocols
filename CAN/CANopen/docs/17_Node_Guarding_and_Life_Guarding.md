@@ -176,23 +176,23 @@ The lower 7 bits encode the NMT state of the slave at the time of the response:
 
 ```
   ┌─────────────────────────────────────────────────────┐
-  │             NMT State Machine                        │
+  │             NMT State Machine                       │
   │                                                     │
   │   Power-On / Reset                                  │
   │         │                                           │
   │         ▼                                           │
   │   ┌─────────────┐                                   │
-  │   │Initialising │  State = 0x00                    │
+  │   │Initialising │  State = 0x00                     │
   │   │  (0x00)     │                                   │
   │   └──────┬──────┘                                   │
   │          │ Boot-up message sent                     │
   │          ▼                                          │
-  │   ┌─────────────┐   NMT cmd 128  ┌──────────────┐  │
-  │   │Pre-Operat.  │◄───────────────│  Operational │  │
-  │   │  (0x7F)     │────────────────►   (0x05)     │  │
-  │   └──────┬──────┘   NMT cmd 1    └──────┬───────┘  │
-  │          │ NMT cmd 2              NMT cmd 2│        │
-  │          ▼                               ▼         │
+  │   ┌─────────────┐   NMT cmd 128  ┌──────────────┐   │
+  │   │Pre-Operat.  │◄───────────────│  Operational │   │
+  │   │  (0x7F)     │────────────────►   (0x05)     │   │
+  │   └──────┬──────┘   NMT cmd 1    └──────┬───────┘   │
+  │          │ NMT cmd 2           NMT cmd 2│           │
+  │          ▼                              ▼           │
   │   ┌─────────────┐                 ┌──────────────┐  │
   │   │  Stopped    │◄────────────────│  Stopped     │  │
   │   │  (0x04)     │  NMT cmd 2      │  (0x04)      │  │
@@ -414,12 +414,12 @@ or causes bus errors.
 ```
   CAN 2.0 Frame:                     CAN FD Frame:
   ┌────────────────────────────┐      ┌─────────────────────────────────┐
-  │ SOF │ Arbitration │ Control │      │ SOF │ Arbitration │ Control     │
-  │  1  │  11/29 bits  │  6bits │      │  1  │  11/29 bits  │  7/8 bits  │
-  │     │              │  ┌───┐ │      │     │              │  ┌───┐     │
-  │     │              │  │RTR│ │      │     │              │  │BRS│ ←── │
-  │     │              │  └───┘ │      │     │              │  └───┘     │
-  │     │          Bit 4 = RTR  │      │     │         Bit 4 = RRS (res) │
+  │ SOF │ Arbitration │ Control│      │ SOF │ Arbitration │ Control     │
+  │  1  │  11/29 bits │  6bits │      │  1  │  11/29 bits  │  7/8 bits  │
+  │     │             │  ┌───┐ │      │     │              │  ┌───┐     │
+  │     │             │  │RTR│ │      │     │              │  │BRS│ ←── │
+  │     │             │  └───┘ │      │     │              │  └───┘     │
+  │     │          Bit 4 = RTR │      │     │         Bit 4 = RRS (res) │
   └────────────────────────────┘      │     │         Bit 6 = BRS       │
                                       └─────────────────────────────────┘
 
@@ -1171,23 +1171,23 @@ make the heartbeat protocol preferable for all new designs.
   ┌─────────────────────────────────────────────────────────────────────┐
   │  MECHANISM       │  Guard Time (0x100C) × Life-Time Factor (0x100D) │
   ├─────────────────────────────────────────────────────────────────────┤
-  │  MASTER ROLE     │  Sends RTR at Guard Time interval; checks toggle  │
-  │                  │  bit and NMT state in 1-byte response             │
+  │  MASTER ROLE     │  Sends RTR at Guard Time interval; checks toggle │
+  │                  │  bit and NMT state in 1-byte response            │
   ├─────────────────────────────────────────────────────────────────────┤
   │  SLAVE ROLE      │  Responds to RTR with state+toggle byte;         │
-  │                  │  fires Life Guard Event if RTR absent > life time │
+  │                  │  fires Life Guard Event if RTR absent > life time│
   ├─────────────────────────────────────────────────────────────────────┤
   │  TOGGLE BIT      │  Bit 7 of response; alternates each exchange;    │
-  │                  │  detects missed/replayed frames                   │
+  │                  │  detects missed/replayed frames                  │
   ├─────────────────────────────────────────────────────────────────────┤
-  │  COB-ID          │  0x700 + Node-ID (same range as heartbeat)        │
+  │  COB-ID          │  0x700 + Node-ID (same range as heartbeat)       │
   ├─────────────────────────────────────────────────────────────────────┤
   │  ERROR (Master)  │  Node Guard Event → no/wrong response received   │
   │  ERROR (Slave)   │  Life Guard Event → EMCY 0x8130 sent             │
   ├─────────────────────────────────────────────────────────────────────┤
   │  CAN FD          │  NOT SUPPORTED – RTR frames undefined in CAN FD  │
   ├─────────────────────────────────────────────────────────────────────┤
-  │  MIGRATION       │  Replace with Heartbeat (OD 0x1016/0x1017):     │
+  │  MIGRATION       │  Replace with Heartbeat (OD 0x1016/0x1017):      │
   │                  │  1) Set 0x1017 on slave, 2) Set 0x1016 on master │
   │                  │  3) Zero-out 0x100C and 0x100D to disable guard  │
   └─────────────────────────────────────────────────────────────────────┘
@@ -1209,4 +1209,3 @@ make the heartbeat protocol preferable for all new designs.
 *References: CiA 301 v4.2.0 – CANopen Application Layer and Communication Profile;
 ISO 11898-1:2015 – Road vehicles – Controller area network (CAN).*# Node Guarding & Life Guarding (Legacy)
 
-> _TODO: add content_
