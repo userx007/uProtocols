@@ -98,3 +98,8 @@ Developed by BMW and standardized by AUTOSAR, it enables service-oriented commun
 [**REST**](REST/README.md)<br>
 **REST (Representational State Transfer)** is an architectural style for designing networked applications. 
 REST defines a set of constraints that, when applied to web services, create scalable, stateless, and cacheable systems.
+
+---
+
+[**DDS**](DDS/README.md)<br>
+**DDS** Data-centric publish-subscribe paradigm, decoupling in time/space/flow, comparison to broker-based messaging (Kafka, MQTT, AMQP).
