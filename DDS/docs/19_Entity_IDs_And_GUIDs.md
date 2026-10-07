@@ -22,10 +22,10 @@ GUID (16 bytes) = GUID Prefix (12 bytes) + Entity ID (4 bytes)
 
 ```
 ┌─────────────────────────────────────────┬─────────────────┐
-│         GUID Prefix (12 bytes)           │  Entity ID (4B) │
-│    identifies the DomainParticipant      │  identifies the │
-│                                           │  entity within  │
-│                                           │  that participant│
+│         GUID Prefix (12 bytes)          │  Entity ID (4B) │
+│    identifies the DomainParticipant     │  identifies the │
+│                                         │  entity within  │
+│                                         │ that participant│
 └─────────────────────────────────────────┴─────────────────┘
 ```
 
