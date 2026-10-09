@@ -43,7 +43,7 @@ This document walks through the complete toolbox of techniques for achieving a l
 
 ### Typical Target Profiles
 
-| MCU Class         | Flash        | RAM          | CAN Support               |
+| MCU Class         | Flash       | RAM         | CAN Support               |
 |-------------------|-------------|-------------|---------------------------|
 | AVR (ATmega)      | 16–256 KB   | 1–16 KB     | External MCP2515 via SPI  |
 | MSP430            | 16–256 KB   | 2–16 KB     | External TJA1050 via UART |
@@ -59,7 +59,7 @@ This document walks through the complete toolbox of techniques for achieving a l
 +------------------+---------------------------+-----------------------------------+
 | RX message pool  | 1–8 KB (dynamic, heap)    | 64–512 B (static ring buffer)     |
 | TX queue         | 512 B–2 KB (dynamic)      | 32–256 B (static FIFO)            |
-| Filter table     | 256 B–1 KB               | 16–64 B (packed struct array)     |
+| Filter table     | 256 B–1 KB                |  16–64 B (packed struct array)    |
 | Stack code       | 10–60 KB                  | 1–8 KB (stripped, LTO'd)          |
 | Protocol layers  | 4–20 KB (ISO TP, NM, etc) | Compile-time optional             |
 +------------------+---------------------------+-----------------------------------+
@@ -78,7 +78,7 @@ Full Stack                          Minimal Stack
 ─────────────────────────          ─────────────────────────
   Application Layer                  Application Callbacks
        │                                    │
-  COM / PDU Router                   ─ removed ─
+  COM / PDU Router                     ─ removed ─
        │                                    │
   CanIf (Interface)                  Thin shim (< 200 B)
        │                                    │

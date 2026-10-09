@@ -104,6 +104,7 @@ This example simulates a complete ECU node: it periodically broadcasts engine RP
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdint.h>
 #include <unistd.h>
 #include <errno.h>
 #include <signal.h>

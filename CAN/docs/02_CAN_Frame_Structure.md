@@ -106,13 +106,13 @@ After EOF, there's an **Interframe Space (IFS)** of at least 3 recessive bits be
 Standard CAN Data Frame:
 ┌─────┬──────────────────┬────────────────┬──────────┬─────────┬─────┬─────┐
 │ SOF │  Arbitration     │    Control     │   Data   │   CRC   │ ACK │ EOF │
-│  1  │ ID(11) + RTR(1) │ IDE+r0+DLC(4) │  0-8B    │ 15+1    │ 2   │  7  │
+│  1  │ ID(11) + RTR(1)  │ IDE+r0+DLC(4)  │  0-8B    │  15+1   │ 2   │  7  │
 └─────┴──────────────────┴────────────────┴──────────┴─────────┴─────┴─────┘
 
 Extended CAN Data Frame:
 ┌─────┬────────────────────────────────────┬────────────────┬──────┬─────┬─────┬─────┐
 │ SOF │          Arbitration               │    Control     │ Data │ CRC │ ACK │ EOF │
-│  1  │ ID(11)+SRR+IDE+ID(18)+RTR         │ r1+r0+DLC(4)  │ 0-8B │15+1 │  2  │  7  │
+│  1  │ ID(11)+SRR+IDE+ID(18)+RTR          │ r1+r0+DLC(4)   │ 0-8B │15+1 │  2  │  7  │
 └─────┴────────────────────────────────────┴────────────────┴──────┴─────┴─────┴─────┘
 ```
 

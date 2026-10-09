@@ -37,7 +37,7 @@ CAN XL frames include several key components:
 
 // CAN XL Frame Structure
 typedef struct {
-    uint8_t priority;           // Priority field for arbitration
+    uint8_t priority;          // Priority field for arbitration
     uint8_t vcid;              // Virtual CAN Network ID
     uint8_t sdu_type;          // SDU type identifier
     uint16_t data_length;      // Payload length (0-2048 bytes)
