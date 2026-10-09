@@ -37,7 +37,7 @@ CAN is a robust serial communication protocol commonly used in automotive and in
 
 ```
 ┌─────────────┐      ┌──────────────┐      ┌─────────────┐
-│  CAN Bus    │─────▶│ CAN          │      │   Memory    │
+│  CAN Bus    │────▶│ CAN          │      │   Memory    │
 │             │      │ Controller   │      │   Buffer    │
 └─────────────┘      │              │      │             │
                      │  ┌────────┐  │      │ ┌─────────┐ │

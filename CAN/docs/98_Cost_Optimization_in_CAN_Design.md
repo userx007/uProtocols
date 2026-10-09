@@ -19,8 +19,6 @@
 
 **Summary table** maps each technique to its concrete cost reduction mechanism and typical impact.
 
-# 98. Cost Optimization in CAN Design
-
 > Balancing component selection, bandwidth requirements, and system partitioning for cost-effective designs.
 
 ---

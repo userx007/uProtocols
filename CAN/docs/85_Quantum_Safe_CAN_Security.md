@@ -163,7 +163,7 @@ The solution is a **tiered approach** separating long-term PQC operations from r
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │                    TIER 1: Offline / OTA                    │
-│  PQC Digital Signatures (ML-DSA / SLH-DSA)                 │
+│  PQC Digital Signatures (ML-DSA / SLH-DSA)                  │
 │  - ECU firmware signing & verification                      │
 │  - Certificate chain validation                             │
 │  - Long-term key provisioning                               │
@@ -179,9 +179,9 @@ The solution is a **tiered approach** separating long-term PQC operations from r
                      │ Symmetric Session Keys
 ┌────────────────────▼────────────────────────────────────────┐
 │                TIER 3: Real-Time CAN Traffic                │
-│  Symmetric Cryptography (AES-256-GCM / CMAC-AES-256)       │
+│  Symmetric Cryptography (AES-256-GCM / CMAC-AES-256)        │
 │  - Per-message authentication (AUTOSAR SecOC extended)      │
-│  - Truncated MAC tags (4–8 bytes) in CAN payload           │
+│  - Truncated MAC tags (4–8 bytes) in CAN payload            │
 │  - Replay protection via freshness counters                 │
 └─────────────────────────────────────────────────────────────┘
 ```
@@ -191,7 +191,7 @@ The solution is a **tiered approach** separating long-term PQC operations from r
 ```
 ┌──────────────────────────────────────────────────────┐
 │                  CENTRAL GATEWAY ECU                 │
-│  Full PQC Stack (ML-KEM + ML-DSA + AES-256)         │
+│  Full PQC Stack (ML-KEM + ML-DSA + AES-256)          │
 │  - Manages ECU certificate provisioning              │
 │  - Performs PQC key encapsulation on behalf of ECUs  │
 │  - Distributes symmetric session keys over secure ch │

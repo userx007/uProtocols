@@ -39,7 +39,7 @@ Understanding these measurements allows engineers to detect problems such as mis
 
 CAN uses a two-wire differential bus: **CANH** and **CANL**.
 
-| State      | CANH Voltage | CANL Voltage | Differential (CANH - CANL) |
+| State      |CANH Voltage |CANL Voltage | Differential (CANH - CANL)   |
 |------------|-------------|-------------|------------------------------|
 | Recessive  | ~2.5 V      | ~2.5 V      | ~0 V                         |
 | Dominant   | ~3.5 V      | ~1.5 V      | ~2.0 V                       |
@@ -59,7 +59,7 @@ CAN requires 120 Ohm termination resistors at each end of the bus. The resulting
 CAN bit timing is divided into segments:
 
 ```
-|<--- Nominal Bit Time (NBT) --->|
+|<------- Nominal Bit Time (NBT) -------------->|
 | SYNC_SEG | PROP_SEG | PHASE_SEG1 | PHASE_SEG2 |
      1 Tq     1-8 Tq     1-8 Tq       1-8 Tq
 ```
@@ -122,7 +122,7 @@ A healthy CAN bus at 500 kbit/s should display:
 | Recessive not returning to 2.5 V | Missing termination (only one 120 Ohm present) |
 | CANH/CANL asymmetric amplitude   | Unequal impedance, damaged transceiver         |
 | Common mode offset               | Ground potential difference between nodes      |
-| Negative differential voltage   | CANH/CANL wires swapped                         |
+| Negative differential voltage    | CANH/CANL wires swapped                        |
 
 ---
 
@@ -183,10 +183,10 @@ Voltage
   |  |                            |   <- Minimum amplitude
   |  +----------------------------+
   +-------------------------------------> Time
-         ^                  ^
-     Eye open           Eye close
-     (transition)       (transition)
-         |<--- Eye width --->|
+         ^                    ^
+     Eye open             Eye close
+     (transition)         (transition)
+         |<---- Eye width --->|
 ```
 
 ### Eye Diagram Parameters

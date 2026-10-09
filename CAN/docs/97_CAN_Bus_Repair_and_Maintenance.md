@@ -57,10 +57,10 @@ This chapter focuses on the practical techniques required to:
 
 A CAN bus consists of two wires: **CAN_H** (CAN High) and **CAN_L** (CAN Low), forming a twisted pair terminated at both ends with **120 Ω resistors**. The differential voltage between these lines encodes bits:
 
-| State      | CAN_H Voltage | CAN_L Voltage | Differential (CAN_H - CAN_L) |
+| State      | CAN_H Voltage | CAN_L Voltage | Differential (CAN_H - CAN_L)  |
 |------------|---------------|---------------|-------------------------------|
-| Recessive  | ~2.5 V        | ~2.5 V        | ~0 V                         |
-| Dominant   | ~3.5 V        | ~1.5 V        | ~2.0 V                       |
+| Recessive  | ~2.5 V        | ~2.5 V        | ~0 V                          |
+| Dominant   | ~3.5 V        | ~1.5 V        | ~2.0 V                        |
 
 **Key electrical rules:**
 - Total bus resistance (measured between CAN_H and CAN_L with all power off) should be approximately **60 Ω** (two 120 Ω termination resistors in parallel).
