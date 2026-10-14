@@ -92,19 +92,19 @@ reference.
 
 ```
 ┌─────────────────────────────────────────────┐
-│  Application code                            │
-│  (write(), take(), QoS objects, listeners)   │
+│  Application code                           │
+│  (write(), take(), QoS objects, listeners)  │
 ├─────────────────────────────────────────────┤
-│  DDS API layer                               │
-│  (DomainParticipant, Topic, DataWriter, ...) │
+│  DDS API layer                              │
+│  (DomainParticipant, Topic, DataWriter,...) │
 ├─────────────────────────────────────────────┤
-│  RTPS protocol layer                         │
-│  (Participants, Writers, Readers, GUIDs,     │
-│   discovery, reliability, submessages)       │
+│  RTPS protocol layer                        │
+│  (Participants, Writers, Readers, GUIDs,    │
+│   discovery, reliability, submessages)      │
 ├─────────────────────────────────────────────┤
-│  Transport layer                             │
-│  (UDP/IP multicast+unicast, TCP, Shared      │
-│   Memory — topic 27)                         │
+│  Transport layer                            │
+│  (UDP/IP multicast+unicast, TCP, Shared     │
+│   Memory — topic 27)                        │
 └─────────────────────────────────────────────┘
 ```
 
