@@ -125,3 +125,19 @@ Designing resilient systems using ownership strength, liveliness, and multi-writ
 [39. **DDS Usecases Diagrams**](docs/39_DDS_Use_Cases_ASCII_Diagrams.md)<br>
 A collection of ASCII diagrams illustrating how DDS is used in practice, from core mechanics to industry-specific architectures.
 
+[40. **DDS Internal Communication Flow Step by Step**](docs/40_Internal_Communication_Flow_Step_by_Step)<br>
+Breakdown of the internal communication flow
+
+[41. **DDS Configurations Commented**](docs/41_QoS_Configuration_Commented.md)<br>
+DDS configuration files explained
+
+[42. **DDS  Key Concepts Illustrated**](docs/42_Subdivisions_and_interraction.md)<br>
+Comprehensive ASCII diagram illustrating the logical hierarchy and interaction flow in Cyclone DDS.
+
+[43. **DDS Instance Clarified**](docs/43_Instance_in_DDS_Context.md)<br>
+Clarification of the term `Instance` in the context of DDS
+
+[99. **DDS Index Of Terms**](docs/99_Index_Of_Terms.md)<br>
+Clarification of the terms frequently used in DDS context
+
+

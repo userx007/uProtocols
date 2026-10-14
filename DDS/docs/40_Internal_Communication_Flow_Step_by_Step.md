@@ -1,3 +1,5 @@
+## DDS Internal Communication Flow
+
 To understand how DDS (Data Distribution Service implementations like Cyclone DDS) performs internal communication, we must look past the simple concept of "Publisher sends, Subscriber receives." DDS is a complex middleware that handles discovery, QoS (Quality of Service), security, reliability, and transport abstraction.
 
 Here is a breakdown of the internal communication flow, followed by an ASCII diagram.
