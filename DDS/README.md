@@ -137,6 +137,14 @@ Comprehensive ASCII diagram illustrating the logical hierarchy and interaction f
 [43. **DDS Instance Clarified**](docs/43_Instance_in_DDS_Context.md)<br>
 Clarification of the term `Instance` in the context of DDS
 
+---
+
+[97. **Unicast vs. Multicast**](docs/97_Unicast_vs_Multicast.md)<br>
+Description of the tools to be used to trace, decode, debug the RTPS Protocol
+
+[98. **DDS Tools**](docs/98_DDS_Tools.md)<br>
+Description of the tools to be used to trace, decode, debug the RTPS Protocol
+
 [99. **DDS Index Of Terms**](docs/99_Index_Of_Terms.md)<br>
 Clarification of the terms frequently used in DDS context
 

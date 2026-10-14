@@ -1,0 +1,81 @@
+/* Pandoc EPUB code styling: preserve source line breaks and indentation. */
+
+pre {
+  display: block;
+  max-width: 100%;
+  box-sizing: border-box;
+  margin: 1em 0;
+  padding: 0.8em;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 0.9em;
+  line-height: 1.25;
+  color: inherit;
+  background-color: #f4f4f4;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+
+  /* Preserve newline characters and indentation from Markdown. */
+  white-space: pre;
+  word-wrap: normal;
+  overflow-wrap: normal;
+  word-break: normal;
+
+  padding-left: 0.8em;
+  text-indent: 0;
+}
+
+pre code {
+  /* Do not set display:inline or override whitespace on the inner code. */
+  display: block;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  white-space: inherit;
+  word-wrap: inherit;
+  overflow-wrap: inherit;
+  word-break: inherit;
+  text-indent: 0;
+  margin-left: 0;
+  padding-left: 0;
+}
+
+/* Keep Pandoc syntax-highlighting spans from changing whitespace behavior. */
+pre code span {
+  white-space: inherit;
+  font: inherit;
+}
+
+/* Inline code outside code blocks. */
+:not(pre) > code {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 0.92em;
+}
+
+h1 {
+  font-size: 1.2em;
+  line-height: 1.2;
+  margin-top: 0;
+  margin-bottom: 0.8em;
+}
+
+h2 {
+  font-size: 1.1em;
+  line-height: 1.25;
+  margin-top: 1.2em;
+  margin-bottom: 0.6em;
+}
+
+h3 {
+  font-size: 1.08em;
+  line-height: 1.3;
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+}
+
+h4, h5, h6 {
+  font-size: 1em;
+  line-height: 1.3;
+}
