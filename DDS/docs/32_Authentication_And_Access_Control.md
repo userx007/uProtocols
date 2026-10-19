@@ -12,12 +12,12 @@ The default DDS Security authentication plugin (`DDS:Auth:PKI-DH`) uses:
 ### Handshake Flow (Simplified)
 ```
 Participant A                          Participant B
-    | --- SPDP announcement (unsecured) --->  |
-    | <---------- SPDP announcement --------- |
+    | --- SPDP announcement (unsecured) ---->  |
+    | <---------- SPDP announcement ---------  |
     | --- Handshake Request (cert + DH) ---->  |
     | <--- Handshake Reply (cert + DH) ------  |
     | --- Handshake Final (verified) ------->  |
-    |         [Mutual authentication complete]  |
+    |         [Mutual authentication complete] |
 ```
 Both sides validate the peer's certificate against the shared Identity CA before proceeding — if validation fails, no further discovery or data exchange occurs with that peer.
 
