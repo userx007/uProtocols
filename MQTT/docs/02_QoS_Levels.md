@@ -517,3 +517,81 @@ This allows subscribers to reduce bandwidth/overhead if they don't need the high
 MQTT's Quality of Service levels provide flexible delivery guarantees to match application requirements. **QoS 0** offers fire-and-forget messaging suitable for high-frequency, loss-tolerant data like sensor readings. **QoS 1** guarantees at-least-once delivery with a single acknowledgment, ideal for important messages where occasional duplicates can be handled. **QoS 2** ensures exactly-once delivery through a four-way handshake, necessary for critical operations like financial transactions or device commands where duplicates would cause problems.
 
 The choice of QoS level involves trade-offs between reliability, network overhead, latency, and resource consumption. Understanding these trade-offs and the message flow for each level enables developers to build efficient, reliable MQTT applications. The QoS level is negotiated between publisher and subscriber, with the effective QoS being the minimum of the two, allowing flexibility in system design. Proper implementation of QoS handling, as demonstrated in the C/C++ and Rust examples above, is essential for robust IoT and messaging applications.
+
+### 1. QoS 0: At Most Once
+**"Fire and Forget"**
+*   **Packet used:** `PUBLISH` only.
+*   **Guarantee:** Message may be lost. Never duplicated.
+*   **Use case:** Telemetry, sensor data, frequent updates where speed > reliability.
+
+```text
+Sender (Publisher)                    Receiver (Subscriber)
+       |  PUBLISH (QoS 0)               |
+       |------------------------------> |
+       |                                | (Message processed, no ACK sent)
+       |                                |
+       |                                | (If message is lost on network, sender never knows)
+```
+
+---
+
+### 2. QoS 1: At Least Once
+**"Acknowledge & Retry"**
+*   **Packets used:** `PUBLISH` + `PUBACK`.
+*   **Guarantee:** Message is delivered at least once. May be duplicated if `PUBACK` is lost.
+*   **Use case:** Commands, messages where duplicates are handled by application logic.
+
+```text
+Sender (Publisher)                    Receiver (Subscriber)
+       |  PUBLISH (QoS 1)               |
+       |------------------------------> |
+       |                                | (Message stored locally)
+       |<-- PUBACK ---------------------|
+       | (Ack received,                 |
+       |  transaction complete)         |
+       |                                |
+       | (If PUBACK is lost:)           |
+       |  PUBLISH (QoS 1)               |
+       |------------------------------> | (Duplicate message received)
+       |<-- PUBACK ---------------------|
+```
+
+---
+
+### 3. QoS 2: Exactly Once
+**"Four-Step Handshake"**
+*   **Packets used:** `PUBLISH` → `PUBREC` → `PUBREL` → `PUBCOMP`.
+*   **Guarantee:** Message is delivered exactly once. No loss, no duplicates.
+*   **Use case:** Financial transactions, billing, critical commands where duplicates are expensive or errors.
+
+```text
+Sender (Publisher)                    Receiver (Subscriber)
+       |  PUBLISH (QoS 2)               |
+       |------------------------------->|
+       |                                | (Message stored, ready for delivery)
+       |<-- PUBREC -------------------- |
+       | (Ack:"I received it, go ahead")|
+       |                                |
+       |-- PUBREL --------------------->|
+       | (Release: "I got your PUBREC") |
+       |                                | (Message delivered to application)
+       |<-- PUBCOMP --------------------|
+       | (Complete:                     |
+       |     "Transaction finished")    |
+       |                                |
+       | ............................   |
+       |                                |
+       | (If any packet is lost,        |
+       | it is retransmitted until the  |
+       | 4-step handshake completes)    |
+       |                                |
+       |                                |
+```
+
+### Summary Table
+
+| QoS Level | Flow | Guarantee | Overhead | Best For |
+| :--- | :--- | :--- | :--- | :--- |
+| **QoS 0** | `PUBLISH` | At most once (0 or 1) | Lowest | Telemetry, Sensor Data |
+| **QoS 1** | `PUBLISH` → `PUBACK` | At least once (1 or more) | Medium | Commands, Logs |
+| **QoS 2** | `PUBLISH` → `PUBREC` → `PUBREL` → `PUBCOMP` | Exactly once (1) | Highest | Payments, Critical Events |
